@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities'; */
+
+/* 
+  do you know how root file works?
+  this is usually use when gusto mo mag lagay ng variables here in css
+
+  example:
+*/
+:root{
+  /* font family */
+  --poppins: 'Poppins', sans-serif;
+
+  /* black is black but im not gonna use this */
+  --Nero:#171717;
+  /* #1c1c1c hmmmmm */
+  --Eclipse:#404040;
+  --Gray:#7f7f7f;
+  --Silver:#bfbfbf;
+  /* white is white */
+}
+
+
+@layer components{
+  /* for global class */
+  *{
+    @apply scroll-smooth box-border 
+  }
+
+  .custom-section {
+    @apply  h-screen;
+  }
+  /* rpofile card / landing page / main page / intHeader page */
+  .icons {
+    @apply w-5 h-5 text-cyber-easth-dark_cerulian ease-in hover:ease-out 
+    duration-200 hover:text-cyber-easth-midnight_express hover:w-6 hover:h-6
+  }
+
+
+}
+
+@layer base {
+
+}
+
+@layer utilities {
+  
+}
