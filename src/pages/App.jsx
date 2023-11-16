@@ -1,11 +1,19 @@
 
+import NavBar from "../objects/navBar"
+
 function App() {
+  
 
   return (
     <>
-      <div className=' bg-slate-950 h-screen w-full '>
-        <p className= 'text-white font-bold'>Hello please make sure you read the README.md file</p>
-      </div>
+      <section>
+        <NavBar/>
+        <div>
+
+          <div></div>
+          <div></div>
+        </div>
+      </section>
     </>
   )
 }

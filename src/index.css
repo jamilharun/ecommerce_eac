@@ -30,7 +30,7 @@
 @layer components{
   /* for global class */
   *{
-    @apply scroll-smooth box-border 
+    @apply scroll-smooth box-border;
   }
 
   .custom-section {
@@ -39,10 +39,8 @@
   /* rpofile card / landing page / main page / intHeader page */
   .icons {
     @apply w-5 h-5 text-cyber-easth-dark_cerulian ease-in hover:ease-out 
-    duration-200 hover:text-cyber-easth-midnight_express hover:w-6 hover:h-6
+    duration-200 hover:text-cyber-easth-midnight_express hover:w-6 hover:h-6;
   }
-
-
 }
 
 @layer base {
