@@ -10,7 +10,7 @@ export default {
       transparent: 'transparent',
       current: 'currentColor',
       // gray: colors.gray,
-      // 'white': '#ffffff',
+      'white': '#ffffff',
       'EacColor': {
         'BlackPearl': '#03071E',
         'RedOxide': '#6a040f',
