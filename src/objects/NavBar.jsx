@@ -1,14 +1,14 @@
 import React from 'react'
 import { CiShop, CiLogin, CiShoppingCart, CiBoxList  } from "react-icons/ci";
 import { BiPurchaseTag } from "react-icons/bi";
-
+import eaclogo from '../assets/eaclogo.png'
 
 export default function NavBar() {
+  // document.querySelector('img').src = lggopic
   return (
     <nav className='bg-red-DarkRed flex place-content-between font-poppins text-sm top-0 h-10 w-full'>
-      <div className='flex justify-center items-center'>
-        <CiShop className='ml-4 w-7 h-7 text-white'/>
-        {/* <img src="../assets/jamil.png" alt="" className='w-1 h-1'/> */}
+      <div className='flex justify-center items-center '>
+        <img src={eaclogo} alt="" className='w-5 h-5 mx-4'/>
         <p className='font-poppins text-white'>Ecommerce app</p>
       </div>
       <div className="flex justify-center items-center">
