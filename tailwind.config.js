@@ -18,6 +18,14 @@ export default {
         'TahitiGold': '#F48C06',
         'SelectiveYellow': '#FFBA08'
       },
+      'red': {
+        'LightApricot': '#FFD1A9',
+        'LightSalmon': '#FF9E79',
+        'Tomato': '#FB6D4C',
+        'DarkPastelRed': '#C23B22',
+        'DarkRed': '#8A0000',
+        'Rosewood': '#580000'
+      },
     },
     fontFamily: {
       'poppins': 'Poppins, sans-serif',
