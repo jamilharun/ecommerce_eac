@@ -3,9 +3,13 @@ import { CiShop, CiLogin, CiShoppingCart, CiBoxList  } from "react-icons/ci";
 import { BiPurchaseTag } from "react-icons/bi";
 import eaclogo from '../assets/eaclogo.png'
 import LoginButton from '../components/Login';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export default function NavBar() {
   // document.querySelector('img').src = lggopic
+
+  const { user, isAuthenticated } = useAuth0();
+
   return (
     <nav className='bg-red-DarkRed flex place-content-between font-poppins text-sm top-0 h-10 w-full'>
       <div className='flex justify-center items-center '>
@@ -24,8 +28,13 @@ export default function NavBar() {
         </ul>
         <div className='flex justify-center items-center px-3'>
           {/* <p className='navMenu'><CiLogin className='navMenuIcon'/> Login</p> */}
-          <LoginButton/>
-
+          
+          {
+            user?.sub && (
+              <img src={user.picture} alt={user.name} className='w-6 h-6 mx-4 rounded-full'/>
+            )
+          }
+          {!user?.sub && (<LoginButton/>)}
         </div>
       </div>
     </nav>

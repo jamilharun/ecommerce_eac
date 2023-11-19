@@ -55,16 +55,29 @@
   .categorybtn {
     @apply text-center  
   }
+  .welcomebtn {
+    @apply my-5 h-20 w-full bg-red-Tomato rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100
+  }
+  .welcomebtntxt {
+    @apply font-poppins font-medium text-2xl hover:text-red-Rosewood
+  }
 }
 
 @layer base {
   body {
     margin: 0;
   }
+  
 }
 
 @layer utilities {
   #root {
     /* margin: 100; */
   }
+  
+}
+
+.welcomePage {
+  width: 1000px;
+  height: 400px;
 }

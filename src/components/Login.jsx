@@ -6,11 +6,11 @@ import { Navigate } from "react-router-dom";
 
 
 const LoginButton = () => {
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithRedirect } = useAuth0();
 
-    if (isAuthenticated) {
-        return <Navigate to='/profile'/> 
-    }
+    // if (isAuthenticated) {
+    //     return <Navigate to='/profile'/> 
+    // }
 
     return <button className='navMenu' onClick={() => loginWithRedirect()}><CiLogin className='navMenuIcon'/> Log In</button>;
 };
