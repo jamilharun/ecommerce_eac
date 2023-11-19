@@ -6,6 +6,9 @@ after cloning => To setup this project.
 commands:
 npm install  ==> to install all modules listed in the package.json and its versions
 
+**Reminder**
+ask jamil the data for .env its important in order to run AUth0 and Sanity
+
 to run:
 npm run dev ===> to run local node server.
 

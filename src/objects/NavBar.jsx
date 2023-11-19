@@ -2,6 +2,7 @@ import React from 'react'
 import { CiShop, CiLogin, CiShoppingCart, CiBoxList  } from "react-icons/ci";
 import { BiPurchaseTag } from "react-icons/bi";
 import eaclogo from '../assets/eaclogo.png'
+import LoginButton from '../components/Login';
 
 export default function NavBar() {
   // document.querySelector('img').src = lggopic
@@ -22,7 +23,9 @@ export default function NavBar() {
           <li className='navMenu'><BiPurchaseTag className='navMenuIcon'/> Purchase</li>
         </ul>
         <div className='flex justify-center items-center px-3'>
-          <p className='navMenu'><CiLogin className='navMenuIcon'/> Login</p>
+          {/* <p className='navMenu'><CiLogin className='navMenuIcon'/> Login</p> */}
+          <LoginButton/>
+
         </div>
       </div>
     </nav>
