@@ -57,7 +57,7 @@
     rounded-full hover:bg-red-DarkPastelRed hover:text-red-Rosewood ease-linear duration-100
   }
   .welcomebtn {
-    @apply my-5 h-20 w-full bg-red-Tomato rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100
+    @apply my-5 h-20 w-full bg-red-Tomato rounded-xl hover:bg-red-DarkPastelRed ease-linear duration-100
   }
   .welcomebtntxt {
     @apply font-poppins font-medium text-2xl hover:text-red-Rosewood
@@ -66,7 +66,13 @@
     @apply bg-white w-72 h-72 
   }
   .welcomeAuth {
-    @apply my-5 h-20 w-full bg-blueustom rounded-full ease-linear duration-100
+    @apply my-5 h-20 w-full bg-blueustom rounded-full ease-linear duration-100 flex  items-center
+  }
+  .welcomeAuthInp {
+    @apply w-full bg-blueustom text-center text-white  placeholder:text-white
+  }
+  .welcomeAuthIcon {
+    @apply text-blueustom 
   }
 }
 
