@@ -12,7 +12,14 @@ const LoginButton = () => {
     //     return <Navigate to='/profile'/> 
     // }
 
-    return <button className='navMenu' onClick={() => loginWithRedirect()}><CiLogin className='navMenuIcon'/> Log In</button>;
+    return (
+        <button className='navMenu' onClick={() => loginWithRedirect()}>
+            <CiLogin className='navMenuIcon'/>
+            Log In
+        
+        </button>
+    
+    )
 };
 
 export default LoginButton;
