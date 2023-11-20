@@ -3,7 +3,7 @@ import React from 'react'
 export default function Categories() {
   return (
     <section>
-      <div className='grid place-content-center grid-cols-5'>
+      <div className='grid place-content-center grid-cols-5 mt-10 gap-20 '>
         <div className='categorybtn'>
           <p>Uniforms</p>
           {/* <div>

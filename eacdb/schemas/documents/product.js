@@ -10,24 +10,33 @@ export default defineType({
             title: 'Name',
             type: 'string',
             description: 'name of the product',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            
         }),
         defineField({
             name: 'price',
             title: 'Price',
             type: 'number',
             description: 'price of the product',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            
+        }),
+        defineField({
+            name: 'description',
+            title: 'Description',
+            type: 'string',
+            description: 'description of the product',
+            
         }),
         defineField({
             name: 'category',
             title: 'Category',
             type: 'string',
             description: 'category of the product',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            
+        }),
+        defineField({
+            name: 'image',
+            type: 'imageObject',
+            title: 'Image',
         }),
     ]
 })

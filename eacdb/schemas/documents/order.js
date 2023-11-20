@@ -13,30 +13,23 @@ export default defineType({
                 title: 'User',
                 type: 'user'
             }],
-            validation: rule=> rule.required()
+            description: 'yung bibili',
         }),
         defineField({
             name: 'product',
             title: 'Product',
-            type: 'array',
-            of: [{
-                type: 'reference',
-                to: [{ type: 'product'}]
-            }],
-            validation: rule=> rule.required()
+            type: 'reference',
+            to: [{ type: 'product'}],
         }),
         defineField({
             name: 'quantity',
             title: 'Quantity',
-            type: 'array',
-            of: [{
-                type: 'number',
-                
-            }],
+            type: 'number',
+            
         }),
         defineField({
-            name: 'Totalprice', //price
-            title: 'TotalPrice',
+            name: 'paymentAmount', //price
+            title: 'Payment_Amount',
             type: 'number',
         }),
     ]

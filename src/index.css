@@ -53,13 +53,20 @@
     
   }
   .categorybtn {
-    @apply text-center  
+    @apply text-center bg-red-Tomato h-10 flex justify-center items-center font-poppins text-base font-semibold
+    rounded-full hover:bg-red-DarkPastelRed hover:text-red-Rosewood ease-linear duration-100
   }
   .welcomebtn {
     @apply my-5 h-20 w-full bg-red-Tomato rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100
   }
   .welcomebtntxt {
     @apply font-poppins font-medium text-2xl hover:text-red-Rosewood
+  }
+  .featureItems {
+    @apply bg-white w-72 h-72 
+  }
+  .welcomeAuth {
+    @apply my-5 h-20 w-full bg-blueustom rounded-full ease-linear duration-100
   }
 }
 
@@ -74,6 +81,10 @@
   #root {
     /* margin: 100; */
   }
+  /* .featuredBox {
+    width: 100%;
+
+  } */
   
 }
 

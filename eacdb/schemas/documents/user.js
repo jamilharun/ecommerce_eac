@@ -6,38 +6,58 @@ export default defineType({
     type: 'document',
     fields: [
         defineField({
-            name: 'sub',
-            title: 'Sub',
+            name: 'fname',
+            title: 'FirstName',
             type: 'string',
-            description: [('sub will be use as foreign key in out system so it is as important ' +
-            'why is there user_id when you fetch data from Vision you may ask? ' + 
-            'because user_id is automatically generated once a data is send to Sanity database to store')],
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            description: 'name of the user ',
+            
         }),
         defineField({
-            name: 'name',
-            title: 'Name',
+            name: 'lname',
+            title: 'LastName',
             type: 'string',
-            description: 'name of the user from auth0',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            description: 'name of the user ',
+            
+        }),
+        defineField({
+            name: 'password',
+            title: 'Password',
+            type: 'string',
+            description: 'password of the user ',
+            
         }),
         defineField({
             name: 'email',
             title: 'Email',
             type: 'string',
-            description: 'email of the user from auth0',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            description: 'email of the user ',
+            
+        }),
+        defineField({
+            name: 'phoneNumber',
+            title: 'PhoneNumber',
+            type: 'number',
+            description: 'num of the user ',
+            
+        }),
+        defineField({
+            name: 'courseSection',
+            title: 'CourseSection',
+            type: 'string',
+            description: 'email of the user ',
+            
+        }),
+        defineField({
+            name: 'image',
+            type: 'imageObject',
+            title: 'Image',
         }),
         defineField({
             name: 'roles',
             title: 'Roles',
             type: 'boolean',
             description: 'if false or neither. => user is not admin.. else if true => user admin',
-            validation: rule=> [
-                rule.required().warning('this is important')],
+            
         }),
     ]
 })

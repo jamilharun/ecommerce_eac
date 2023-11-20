@@ -26,6 +26,7 @@ export default {
         'DarkRed': '#8A0000',
         'Rosewood': '#580000'
       },
+      'blueustom': '#266099'
     },
     fontFamily: {
       'poppins': 'Poppins, sans-serif',

@@ -35,7 +35,8 @@ const Profile = () => {
 
             <button onClick={()=> {setGoToHome(true)}}>home </button>
             <LogoutButton/>
-        </div>   
+        </div> 
+        
     )
 
 
