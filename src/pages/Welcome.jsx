@@ -11,6 +11,7 @@ import LoginButton from '../components/Login'
 import { PiUserCircleFill } from "react-icons/pi";
 import { FaLock, FaUser } from "react-icons/fa";
 import { client } from '../utils/sanity';
+import { data } from 'autoprefixer';
 
 
 export const AuthProvider = createContext({})
@@ -23,11 +24,62 @@ export default function Welcome() {
 
   // const [error, setError] = useState('')
 
-  const [fetchUsers, SetFetchUsers] = useState(null)
+  const [fetchUser, SetFetchUser] = useState(null)
+  const [userCreated, setUserCreated] = useState(null)
 
-  const handleSubmit = (e) => {
+  const onLogin = (e) => {
     e.preventDefault()
 
+    if (userName.endsWith('@eac.edu.ph')) {
+      // console.log('correct' + userName);
+
+      const hash = CryptoJS.SHA256(userName).toString();
+      setUid(hash)
+
+      // console.log(uid);
+    }
+  
+    client.fetch(`*[_id == '${uid}']{
+      _id,
+      email,
+      password
+    }`)
+    .then((data)=> {
+      SetFetchUser(data)
+
+      // console.log(fetchUser);
+      // const { _id, email, password} = fetchUser
+      
+      // const userInfoArray = fetchUser.map
+
+      const fetched = fetchUser[0]
+
+      // console.log('the id: ' + fetched._id);
+      // console.log('email: ' + fetched.email);
+      // console.log('password: ' + fetched.password);
+      
+      if (fetched._id == uid) {
+        console.log('uid match');
+        
+        if (fetched.password == password) {
+          console.log('password match');
+          
+          return (
+            <AuthProvider.Provider value={fetched}></AuthProvider.Provider>
+          )
+        }
+      } else {
+        console.log("login failed");
+        // <Navigate to='home'/>
+        handleSubmit()
+      }
+      }).catch(console.error)
+    console.log(fetchUser);
+
+  }
+
+  const handleSubmit = async () => {
+    
     if (userName.endsWith('@eac.edu.ph')) {
       console.log('correct' + userName);
     }
@@ -46,21 +98,16 @@ export default function Welcome() {
       email: userName,
       password: password,
     };
-    client.createIfNotExists(doc).then(()  =>  {
-      console.log("user successfully created");
-    }).catch(console.error)
-    useEffect(()=>{
-      client.fetch(`*[_type == 'user']{
-        _id,
-        email,
-        password
-      }`)
-      .then((data)=> SetFetchUsers(data))
-      .catch(console.error)
-    },[])
+    client.createIfNotExists(doc)
+    .then(()  =>  { 
+      console.log('successful')
+      onLogin()})
+    .catch(console.error)
+
 
   }
   
+
   
   return (
     <section className='w-screen h-screen  bg-red-LightApricot flex justify-center items-center'>
@@ -75,7 +122,7 @@ export default function Welcome() {
           
           <form 
             className='flex flex-col items-center justify-center'
-            onSubmit={handleSubmit}>
+            onSubmit={onLogin}>
             
             <div className='welcomeAuth'>
               <div className='bg-white rounded-full w-5 h-5 flex justify-center items-center mx-5'>
