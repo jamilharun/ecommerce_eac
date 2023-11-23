@@ -4,13 +4,14 @@ import NavBar from "../objects/navBar"
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Home";
 import Welcome from "./Welcome";
+import { UserProvider } from "../components/UserProvider";
 
 
 function App() {
   
   return (
     <>
-      {/* <UserProvider> */}
+      <UserProvider>
         <Router>
           <Routes>
             <Route index path="/" element={<Welcome/>}/>
@@ -21,7 +22,7 @@ function App() {
 
           </Routes>
         </Router>
-      {/* </UserProvider> */}
+      </UserProvider>
     </>
   )
 }

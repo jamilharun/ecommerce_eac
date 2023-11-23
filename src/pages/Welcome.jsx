@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom'
 
 import { FaLock, FaUser } from "react-icons/fa";
 import { client } from '../utils/sanity';
+import { AuthProvider } from '../components/UserProvider';
 
 
 
@@ -25,47 +26,55 @@ export default function Welcome() {
   
   const [fetchUser, SetFetchUser] = useState(null)
   const [userCreated, setUserCreated] = useState(null)
+  // const [fetchingData, getFetchingData] = useState(null)
 
 
+  const {userData, setUserData} = useContext(AuthProvider);
 
   const onLogin = async (e) => {
     e.preventDefault()
 
-    // if (userName.endsWith('@eac.edu.ph')) {
-      
-    //   console.log('correct domain');
 
-    //   const hash = CryptoJS.SHA256(userName).toString();
-    //   setUid(hash)      
-    // }
+    console.log('now saveed data: ' + userData);
+    
 
     const acceptableDomain = '@eac.edu.ph';
 
     if (userName.includes(acceptableDomain)) {
       console.log('correct domain');
+      
       const hash = CryptoJS.SHA256(userName).toString();
       setUid(hash)
 
-      client.fetch(`*[_id == '${uid}']{
-        _id,
-        email,
-        password
-      }`)
-      .then((data)=> {
-        SetFetchUser(data)
-        console.log(fetchUser);
-
-        const fetched = fetchUser[0]
+      // console.log(uid);
+      
+      try {
+        client.fetch(`*[_id == '${uid}']{
+          _id,
+          email,
+          password
+        }`)
+        .then((data)=> {
+          SetFetchUser(data)
+          // console.log(fetchUser);
+  
+        }).catch(console.error)
+      } catch (error) {
+        console.log(error);
+      }
+        
+      const fetched = fetchUser[0]
+      
+      // console.log('fetched'+ fetchUser[0]);
               
         if (Array.isArray(fetchUser) && fetchUser.length  === 0) {
           console.warn("login failed"); 
           handleSubmit();
         } else {
           console.log('may data');
-          
+          setUserData(fetched)
         }
 
-        }).catch(console.error)
     }else{
       console.log('wrong domain');
     }
@@ -100,7 +109,7 @@ export default function Welcome() {
     // kung ready na. papasok na natin sha sa DB
     client.createIfNotExists(doc)
     .then(()  =>  { 
-      console.log('successful')
+      console.log('creating account successful')
       onLogin()})           
     .catch(console.error)
   }
