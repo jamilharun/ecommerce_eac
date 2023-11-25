@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { CiShop, CiLogin, CiShoppingCart, CiBoxList  } from "react-icons/ci";
+import { CiShop, CiLogin, CiShoppingCart, CiBoxList, CiSearch  } from "react-icons/ci";
 import { BiPurchaseTag } from "react-icons/bi";
-import eaclogo from '../assets/eaclogo.png'
+import eaclogo from '../assets/eac.png'
+import eacIcon from '../assets/eacExpress.png'
 // import LoginButton from '../components/Login';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Navigate } from 'react-router-dom';
@@ -15,31 +16,27 @@ export default function NavBar() {
   if (goToProfile) {return <Navigate to='/profile'/>}
 
   return (
-    <nav className='bg-red-DarkRed flex place-content-between font-poppins text-sm top-0 h-16 w-full px-16'>
+    <nav className='bg-CartoonViolence flex place-content-between font-poppins text-sm top-0 h-16 w-full px-16'>
       <div className='flex justify-center items-center '>
-        <img src={eaclogo} alt="" className='w-14 h-14 mx-4'/>
-        <p className='font-poppins text-white'>Ecommerce app</p>
+        <img src={eaclogo} alt="" className='w-11 h-11 -rotate-12'/>
+        <img src={eacIcon} alt="" className='w-36 h-11 absolute left-20'/>
       </div>
-      <div className="flex justify-center items-center">
-        <input type="text" name="" id="" placeholder='search box'
-        className='searchBox w-80 h-7 rounded-lg px-4 '/>
+      <div className='flex justify-center items-center'>
+        <div className="bg-white rounded-full flex justify-center items-center ">
+          <input type="text" name="" id="" placeholder='search box'
+          className='ml-5 w-80 h-7 px-4 '/>
+          <CiSearch className='navMenuIcon text-red-Rosewood text-lg'/>
+        </div>
       </div>
       <div className='flex justify-center items-center'>
         <ul className='flex justify-center items-center '>
-          <li className='navMenu'><CiShop className='navMenuIcon'/> Product</li>
-          <li className='navMenu'><CiShoppingCart className='navMenuIcon'/> Cart</li>
-          <li className='navMenu'><BiPurchaseTag className='navMenuIcon'/> Purchase</li>
+          <li className='navMenu'> Home</li>
+          <li className='navMenu'> About us</li>
+          <li className='navMenu'> Shop</li>
+          <li className='navMenu'> My Account</li>
+          <CiShoppingCart className='shoppingCart'/>
         </ul>
-        <div className='flex justify-center items-center px-3'>
-          {/* <p className='navMenu'><CiLogin className='navMenuIcon'/> Login</p> */}
-{/*           
-          {
-            user?.sub && (
-              <img onClick={()=>{setGoToProfile(true)}} src={user.picture} alt={user.name} className='w-12 h-12 mx-4 rounded-full'/>
-            )
-          }
-          {!user?.sub && (<LoginButton/>)} */}
-        </div>
+        
       </div>
     </nav>
   )

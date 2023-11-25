@@ -44,7 +44,7 @@
   }
   .navMenu {
     @apply text-white flex justify-center items-center hover:bg-red-DarkPastelRed 
-    ease-linear duration-100 rounded-xl px-3;
+    ease-linear duration-100 rounded-xl px-6 text-xl;
   }
   .navMenuIcon {
     @apply w-5 h-5
@@ -57,7 +57,7 @@
     rounded-full hover:bg-red-DarkPastelRed hover:text-red-Rosewood ease-linear duration-100
   }
   .welcomebtn {
-    @apply my-5 h-20 w-full bg-red-Tomato rounded-xl hover:bg-red-DarkPastelRed ease-linear duration-100
+    @apply my-5 h-20 w-full bg-AlluraRed rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100
   }
   .welcomebtntxt {
     @apply font-poppins font-medium text-2xl hover:text-red-Rosewood
@@ -69,10 +69,13 @@
     @apply my-5 h-20 w-full bg-blueustom rounded-full ease-linear duration-100 flex  items-center
   }
   .welcomeAuthInp {
-    @apply w-full bg-blueustom text-center text-white  placeholder:text-white
+    @apply w-full bg-blueustom text-center text-white  placeholder:text-white placeholder:font-medium placeholder:text-xl
   }
   .welcomeAuthIcon {
-    @apply text-blueustom 
+    @apply text-blueustom text-4xl
+  }
+  .shoppingCart {
+    @apply text-white text-5xl
   }
 }
 
@@ -95,6 +98,6 @@
 }
 
 .welcomePage {
-  width: 1000px;
-  height: 400px;
+  width: 1500px;
+  height: 600px;
 }

@@ -71,23 +71,32 @@ export default function Welcome() {
           password
         }`);
         SetFetchUser(data)
+        setFetched(fetchUser[0]);
 
         setLoading(false)
 
-        fetchedData()
+        fetchCondition()
       } catch (error) {
         console.log(error);
         setEvent('fetch error. try again')
         setLoading(false)
       }
     }
-
+    
+    const fetchCondition = () => {
+      if (fetched === null || fetched === undefined || (Array.isArray(fetched) && fetched.length === 0)) {
+        console.log('walang data');
+        createAcc()
+      } else {
+        console.log('may data');
+        fetchedData()
+      }
+    }
 
 
     const fetchedData = () => {
         setLoading(true)
 
-        setFetched(fetchUser[0]);
         loginAuth(fetched)
 
         setLoading(false)
@@ -98,7 +107,8 @@ export default function Welcome() {
       console.log(userName);
       console.log(password);
       console.log(fetchUser);
-    console.log('');
+      console.log(fetched);
+    console.log('-----------');
 
     // const uidCheck = async () => {!uid ? console.error('uid not allowed') : fetchingData();}
     // const fetchcheck = async () => {!fetchUser ? console.error('fetched user empty') : fetchedData()}
@@ -112,11 +122,6 @@ export default function Welcome() {
 
   // ito create acc function
   const createAcc = () => {
-
-    // this will check if yung Uid is mas laman or wala
-    if (!uid) { 
-      console.log("its empty");
-    }
 
     const doc = {
       _id: uid,
@@ -142,17 +147,15 @@ export default function Welcome() {
     
   }
   
-
+  
   
   return (
-    <section className='w-screen h-screen  bg-red-LightApricot flex justify-center items-center'>
+    <section className='w-screen h-screen bg-articDaisy flex justify-center items-center'>
       <span className='top-0 absolute'><img src={arrowright} alt="" /></span>
         <div className='w-full h-full welcomePage grid grid-cols-3 gap-16 '>
-          <div className='grid place-items-center'>
-            <img src={eaclogo} alt="" className=''/>
-          </div>
-          <div className='grid place-items-center'>
-            <img src={eacExprLogo} alt=""/>
+          
+          <div className='grid place-items-center col-span-2'>
+            <img src={eacExprLogo} alt="" className='h-full w-full'/>
           </div>
           
           <form 
@@ -160,7 +163,7 @@ export default function Welcome() {
             onSubmit={onLogin}>
             
             <div className='welcomeAuth'>
-              <div className='bg-white rounded-full w-5 h-5 flex justify-center items-center mx-5'>
+              <div className='bg-white rounded-full w-12 h-12 flex justify-center items-center ml-5'>
                 <FaUser className='welcomeAuthIcon'/> 
               </div>
               <input 
@@ -174,7 +177,7 @@ export default function Welcome() {
             </div>
             
             <div className='welcomeAuth'>
-              <div className='bg-white rounded-full w-5 h-5 flex justify-center items-center mx-5'>
+              <div className='bg-white rounded-full w-12 h-12 flex justify-center items-center ml-5'>
                 <FaLock className='welcomeAuthIcon'/>
               </div>
               <input 
