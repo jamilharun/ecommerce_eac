@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { Navigate } from 'react-router-dom'
 
 
@@ -6,28 +6,33 @@ export const AuthProvider = createContext()
 
 export const UserProvider = ({ children }) => {
     const [userData, setUserData] = useState()
+    const [loggedIn, setLoggedId] = useState(false)
 
-    useEffect(()=>{
+
+const loginAuth = (newValue) => {
+
+        setUserData(newValue)
+        
         console.log(userData);
-        return console.log("user data has been change");
-    },[userData])
-
-    if (userData) {
-        <Navigate to='/home'/>
+        
+        setLoggedId(true)
     }
 
-    // const loginAuth = (newValue) => {
-    //     setUserData(newValue)
-    // }
+    const logoutAuth = () => {
+        setUserData(null)
+        setLoggedId(false)
+    }
 
     // const logoutAuth = (removeValue) => {
     //     setUserData(removeValue)
     // }
     return (
 
-        <AuthProvider.Provider value={{userData, setUserData }}>
+        <AuthProvider.Provider value={{userData,  loginAuth, loggedIn}}>
             {children}
         </AuthProvider.Provider>
     )
     
 }
+
+

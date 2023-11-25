@@ -1,15 +1,15 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CryptoJS from 'crypto-js';
 
 import eaclogo from '../assets/eaclogo.png'
 import arrowright from '../assets/arrowright.png'
 import arrowleft from '../assets/arrowleft.png'
 import eacExprLogo from '../assets/eac_express_logo.png'
-import { Navigate } from 'react-router-dom'
 
 import { FaLock, FaUser } from "react-icons/fa";
 import { client } from '../utils/sanity';
-import { AuthProvider } from '../components/UserProvider';
+import { useUser } from '../utils/user';
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -20,85 +20,104 @@ export default function Welcome() {
   // mas madalas namin to ginagamit to nag babago yung data ng variable
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const [uid, setUid] = useState('');
+  const [uid, setUid] = useState(null);
 
-  // const [error, setError] = useState('')
+  const [fetched, setFetched] = useState()
   
   const [fetchUser, SetFetchUser] = useState(null)
-  const [userCreated, setUserCreated] = useState(null)
-  // const [fetchingData, getFetchingData] = useState(null)
+  const [event, setEvent] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-
-  const {userData, setUserData} = useContext(AuthProvider);
+  // const {userData, loginAuth} = useContext(AuthProvider);
+  
+  const {userData, loginAuth, loggedIn} = useUser()
 
   const onLogin = async (e) => {
     e.preventDefault()
-
-
-    console.log('now saveed data: ' + userData);
+    
     
 
     const acceptableDomain = '@eac.edu.ph';
-
-    if (userName.includes(acceptableDomain)) {
-      console.log('correct domain');
+    
+    const hashGenerate = async () => {
       
-      const hash = CryptoJS.SHA256(userName).toString();
-      setUid(hash)
+      if (!userName.includes(acceptableDomain)) {
+        return setUid(null)
+      }else{
+        try {
+          setLoading(true)
+          const hash = await CryptoJS.SHA256(userName).toString();
+          setUid(hash)
+          
+          setEvent('click again')
+          
+          setLoading(false)
 
-      // console.log(uid);
-      
+        } catch (error) {
+          console.error(error);
+        }
+        fetchingData()
+      }
+    }
+
+    
+    const fetchingData = async () => {
       try {
-        client.fetch(`*[_id == '${uid}']{
+        setLoading(true)
+
+        const data = await client.fetch(`*[_id == '${uid}']{
           _id,
           email,
           password
-        }`)
-        .then((data)=> {
-          SetFetchUser(data)
-          // console.log(fetchUser);
-  
-        }).catch(console.error)
+        }`);
+        SetFetchUser(data)
+
+        setLoading(false)
+
+        fetchedData()
       } catch (error) {
         console.log(error);
+        setEvent('fetch error. try again')
+        setLoading(false)
       }
-        
-      const fetched = fetchUser[0]
-      
-      // console.log('fetched'+ fetchUser[0]);
-              
-        if (Array.isArray(fetchUser) && fetchUser.length  === 0) {
-          console.warn("login failed"); 
-          handleSubmit();
-        } else {
-          console.log('may data');
-          setUserData(fetched)
-        }
-
-    }else{
-      console.log('wrong domain');
     }
+
+
+
+    const fetchedData = () => {
+        setLoading(true)
+
+        setFetched(fetchUser[0]);
+        loginAuth(fetched)
+
+        setLoading(false)
+      }
+      
+      console.log('fetch test');
+      console.log(uid);
+      console.log(userName);
+      console.log(password);
+      console.log(fetchUser);
+    console.log('');
+
+    // const uidCheck = async () => {!uid ? console.error('uid not allowed') : fetchingData();}
+    // const fetchcheck = async () => {!fetchUser ? console.error('fetched user empty') : fetchedData()}
+
+    hashGenerate()
+    
+    // uidCheck()
+    // fetchcheck()
+    
   }
 
   // ito create acc function
-  const handleSubmit = () => {
-    
-    // checheck nya naamn ulit kung naka eac email
-    if (userName.endsWith('@eac.edu.ph')) {
-      console.log('correct' + userName);
-    }
+  const createAcc = () => {
 
-    // dito i hahash nga naman yung Uid
-    const hash = CryptoJS.SHA256(userName).toString();
-    setUid(hash)
-    console.log(hash);
-    
     // this will check if yung Uid is mas laman or wala
     if (!uid) { 
       console.log("its empty");
     }
 
-    // ito dito natin i reready mga data natin before ipasok sa database 
     const doc = {
       _id: uid,
       _type: 'user',
@@ -106,12 +125,21 @@ export default function Welcome() {
       password: password,
     };
 
-    // kung ready na. papasok na natin sha sa DB
-    client.createIfNotExists(doc)
-    .then(()  =>  { 
+    // ito dito natin i reready mga data natin before ipasok sa database 
+    try {
+      client.createIfNotExists(doc)
+      .then(()  =>  { 
       console.log('creating account successful')
-      onLogin()})           
-    .catch(console.error)
+      setUserCreated('new login Acc created, click login again to login')
+      })
+      .catch(console.error)
+    } catch (error) {
+      console.log(error);
+      setEvent('creating acc error')
+    }
+
+    // kung ready na. papasok na natin sha sa DB
+    
   }
   
 
@@ -157,9 +185,9 @@ export default function Welcome() {
                 value={password}
                 onChange={(e)=> setPassword(e.target.value)}/>
             </div>
-            
-            <button className='welcomebtn'><p className="welcomebtntxt">Login</p></button>            
-            
+            {!loading ? (<button className='welcomebtn'><p className="welcomebtntxt">Login</p></button>) : (<div>loading</div>)}
+            {userData ? <Navigate to='/home'/> : <div></div>}        
+            <p>{ event }</p>
           </form>
       </div>
       <span className='bottom-0 absolute'><img src={arrowleft} alt="" /></span>
