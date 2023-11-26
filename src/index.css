@@ -53,14 +53,13 @@
     
   }
   .categorybtn {
-    @apply text-center bg-red-Tomato h-10 flex justify-center items-center font-poppins text-base font-semibold
-    rounded-full hover:bg-red-DarkPastelRed hover:text-red-Rosewood ease-linear duration-100
+    @apply flex flex-col justify-center items-center pointer-events-auto
   }
   .welcomebtn {
-    @apply my-5 h-20 w-full bg-AlluraRed rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100
+    @apply my-5 h-full w-full bg-AlluraRed rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100 overflow-hidden 
   }
   .welcomebtntxt {
-    @apply font-poppins font-medium text-2xl hover:text-red-Rosewood
+    @apply font-poppins font-medium text-2xl hover:text-red-Rosewood text-white font-medium text-xl
   }
   .featureItems {
     @apply bg-white w-72 h-72 
@@ -69,13 +68,20 @@
     @apply my-5 h-20 w-full bg-blueustom rounded-full ease-linear duration-100 flex  items-center
   }
   .welcomeAuthInp {
-    @apply w-full bg-blueustom text-center text-white  placeholder:text-white placeholder:font-medium placeholder:text-xl
+    @apply w-full bg-blueustom text-center text-white font-medium text-xl placeholder:text-white placeholder:font-medium placeholder:text-xl
   }
   .welcomeAuthIcon {
     @apply text-blueustom text-4xl
   }
   .shoppingCart {
     @apply text-white text-5xl
+  }
+  /* this sometimes not work. probably due to browser not compatible   */
+  .categoryPic {
+    @apply w-full h-full rounded-2xl object-cover
+  }
+  .categoryTitle {
+    @apply text-2xl font-bold mt-10
   }
 }
 
@@ -94,10 +100,12 @@
     width: 100%;
 
   } */
-  
-}
-
-.welcomePage {
-  width: 1500px;
-  height: 600px;
+  /* .categoryPic{
+    width: 100%;
+    height: 100%;
+  } */
+  .welcomePage {
+    width: 1500px;
+    height: 600px;
+  }
 }

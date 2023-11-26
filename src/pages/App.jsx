@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Home";
 import Welcome from "./Welcome";
 import { UserProvider } from "../components/UserProvider";
+import ProductPage from "./ProductPage";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
 
             <Route path="/home" element={<Home/>}/>
+            <Route path="/productPage" element={<ProductPage/>}/>
             {/* <Route path="/profile" element={<Profile/>}/> */}
 
           </Routes>

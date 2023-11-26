@@ -174,8 +174,8 @@ export default function Welcome() {
                 pattern="^[a-zA-Z0-9._%+-]+@eac\.edu\.ph$"
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}/>
+              <div className=' rounded-full w-12 h-12 flex justify-center items-center ml-5'></div>
             </div>
-            
             <div className='welcomeAuth'>
               <div className='bg-white rounded-full w-12 h-12 flex justify-center items-center ml-5'>
                 <FaLock className='welcomeAuthIcon'/>
@@ -187,6 +187,7 @@ export default function Welcome() {
                 required
                 value={password}
                 onChange={(e)=> setPassword(e.target.value)}/>
+                <div className=' rounded-full w-12 h-12 flex justify-center items-center ml-5'></div>
             </div>
             {!loading ? (<button className='welcomebtn'><p className="welcomebtntxt">Login</p></button>) : (<div>loading</div>)}
             {userData ? <Navigate to='/home'/> : <div></div>}        
