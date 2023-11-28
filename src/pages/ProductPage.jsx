@@ -46,7 +46,7 @@ const ProductPage = () => {
     
     useEffect(()=>{
         toString()
-    },[])
+    },[catParams.get("category")])
 
     return (
     <div className='bg-articDaisy h-full w-full px-28'>
