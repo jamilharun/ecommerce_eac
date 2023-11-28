@@ -13,15 +13,15 @@ function App() {
   return (
     <>
       <UserProvider>
+
+        {/* <Welcome/> */}
         <Router>
           <Routes>
             <Route index path="/" element={<Welcome/>}/>
-
-
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/productPage" element={<ProductPage/>}/>
-            {/* <Route path="/profile" element={<Profile/>}/> */}
-
+            <Route path="/main/*" element={<NavBar/>} />
+              {/* <Route path="home" element={<Categories/>}/> 
+              <Route path="productPage" element={<ProductPage/>}/> */}
+            
           </Routes>
         </Router>
       </UserProvider>

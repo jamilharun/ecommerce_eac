@@ -8,12 +8,7 @@ import Footer from '../objects/Footer'
 export default function Home() {
   return (
     <section className="bg-articDaisy h-screen w-full">
-        <NavBar/>
-        
         <Categories/>
-            {/* <Featured/> */}
-        
-        <Footer/>
     </section>
 
   )

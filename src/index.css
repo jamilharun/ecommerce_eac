@@ -53,10 +53,10 @@
     
   }
   .categorybtn {
-    @apply flex flex-col justify-center items-center pointer-events-auto
+    @apply flex flex-col justify-center items-center 
   }
   .welcomebtn {
-    @apply my-5 h-full w-full bg-AlluraRed rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100 overflow-hidden 
+    @apply my-5 h-20 w-full bg-AlluraRed rounded-full hover:bg-red-DarkPastelRed ease-linear duration-100 overflow-hidden 
   }
   .welcomebtntxt {
     @apply font-poppins font-medium text-2xl hover:text-red-Rosewood text-white font-medium text-xl
@@ -82,6 +82,12 @@
   }
   .categoryTitle {
     @apply text-2xl font-bold mt-10
+  }
+  .productNavtitl {
+    @apply text-3xl font-bold mt-10
+  }
+  .productNavBtn {
+    @apply text-2xl font-bold mt-4 hover:bg-AlluraRed hover:rounded-full px-3 py-2 text-start w-72
   }
 }
 
