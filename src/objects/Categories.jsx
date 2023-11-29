@@ -5,6 +5,7 @@ import schoolEssentials from '../assets/schoolEssentials.png'
 import schoolMerch from '../assets/schoolMerch.png'
 import schoolUniform from '../assets/schoolUniform.png'
 import { Link, NavLink, Navigate } from 'react-router-dom'
+import Footer from './Footer'
 
 const Categories = ({}) => {
 
@@ -48,7 +49,7 @@ const Categories = ({}) => {
         }  
           
         </div>
-      
+      {/* <Footer/> */}
     </div>
   )
 }

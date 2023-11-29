@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { CiCircleList } from 'react-icons/ci'
 import NavBar from '../objects/navBar'
 import Footer from '../objects/Footer'
-import { Link, NavLink, Outlet, Route, Routes, useParams, useSearchParams } from 'react-router-dom'
-import { fetchProductByCategory } from '../utils/DataQuery'
+import { Link, NavLink, Navigate, Outlet, Route, Routes, useParams, useSearchParams } from 'react-router-dom'
+import { fetchProduct, fetchProductByCategory } from '../utils/DataQuery'
 import { client, urlFor } from '../utils/sanity'
+import ProductView from './ProductView'
 
 const ProductPage = () => {
 
@@ -12,19 +13,20 @@ const ProductPage = () => {
     const [productQuery, setProductQuery] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const [queryType, setQueryType] = useState()
+    
     const [catParams] = useSearchParams()
 
 
     const fetchItem = async () => {
         setLoading(true)
 
-        const query = fetchProductByCategory(catParams.get("category"))
-        
-        // console.log(query);
+        // const query = fetchProductByCategory(catParams.get("category"))
+        const query = queryType;
+
         try {
             const fetching = await client.fetch(`${query}`)
-            // .then((data)=>{setProductQuery(data)})
-            // .catch(err => {console.log(err.message)})
+            
             setProductQuery(fetching)
             // console.log(productQuery);
         } catch (error) {
@@ -35,18 +37,25 @@ const ProductPage = () => {
         setLoading(false)
     }
 
-    const toString = () => {
-        // console.log(catParams.get("category"));
-        // getCat(catParams.get("category"))
-        // console.log(cat);
-        fetchItem()
+    const toString = () => {fetchItem()}
+    
+    const conditionalQueryType = () => {
+        if (!catParams.get("category")) {
+            setQueryType(fetchProduct)
+            toString()
+        } else {
+            setQueryType(fetchProductByCategory(catParams.get("category")))
+            toString()
+        }
     }
     
-    // console.log(catParams);
-    
     useEffect(()=>{
-        toString()
+        conditionalQueryType()
     },[catParams.get("category")])
+
+    const array = {
+        name: 'jamil'
+    }
 
     return (
     <div className='bg-articDaisy h-full w-full px-28'>
@@ -73,13 +82,14 @@ const ProductPage = () => {
                     {
                     productQuery?.map(product => (
                         <div key={product._id} className='w-full m-6 '> 
-                            {/* <Link > */}
-                                <img src={(urlFor(product.image).url())} alt={product.name} className='w-full h-full object-cover rounded-3xl' />
+                            <NavLink to='/main/ProductView' state={product}>
+                                <img src={(urlFor(product?.image).url())} alt={product.name} className='w-full h-full object-cover rounded-3xl' />
                                 <div className='pl-5'>
                                     <p className='text-xl font-bold'>{product.name}</p>
                                     <p className='text-xl font-bold'>₱{product.price}.00</p>
                                 </div>
-                            {/* </Link> */}
+                                
+                            </NavLink>
                         </div>
                         ))
                     }
@@ -89,6 +99,9 @@ const ProductPage = () => {
 
 
         </div>
+        
+        
+
         {/* <Footer/> */}
     </div>
     )

@@ -6,11 +6,16 @@ export const fetchProductByCategory = (category) => {
             category,
             description,
             price,
-            image{
-                asset{
-                    _ref
-                }
-            }
+            image,
         }`;
         return fetchProductQuery;
 };
+
+export const fetchProduct = `*[_type == 'product']{
+            _id,
+            name,
+            category,
+            description,
+            price,
+            image,
+        }`;

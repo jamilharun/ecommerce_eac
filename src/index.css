@@ -89,6 +89,13 @@
   .productNavBtn {
     @apply text-2xl font-bold mt-4 hover:bg-AlluraRed hover:rounded-full px-3 py-2 text-start w-72
   }
+  .profileinp {
+    @apply h-10 w-96 my-5 mx-10 
+  }
+  .profiletext {
+    @apply text-lg font-normal mx-10
+  }
+  
 }
 
 @layer base {
@@ -113,5 +120,19 @@
   .welcomePage {
     width: 1500px;
     height: 600px;
+  }
+  .aboutus {
+    /* top: -100%; */
+  }
+  .productViewPic{
+    width: 400px;
+    height: 400px;
+  }
+  .productViewBox {
+    height: 900px;
+  }
+  .profileimg {
+    height: 400px;
+    width: 400px;
   }
 }

@@ -30,6 +30,7 @@ export default {
       'articDaisy': '#ebe4c0',
       'CartoonViolence': '#d6162d',
       'AlluraRed':'#ed303c',
+      'DarkLemonLime': '#76BA1B'
     },
     fontFamily: {
       'poppins': 'Poppins, sans-serif',
