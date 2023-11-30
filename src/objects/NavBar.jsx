@@ -12,6 +12,8 @@ import ProductView from '../pages/ProductView';
 import Profile from '../pages/Profile';
 import Cart from '../pages/Cart';
 import AboutUs from '../pages/AboutUs';
+import PurchaseSuccess from '../pages/PurchaseSuccess';
+import { UserProfile } from '../pages/UserProfile';
 
 export default function NavBar() {
   const [searchTerm, setSearchTerm] = useState('')
@@ -47,7 +49,7 @@ export default function NavBar() {
             <li  className='navMenu'> <NavLink to='main'>Home</NavLink> </li>
             <li className='navMenu'><NavLink to='AboutUs'>About us</NavLink> </li>
             <li className='navMenu'><NavLink to='Product/'>Shop</NavLink></li>
-            <li className='navMenu'><NavLink to={'Profile'}>My Account</NavLink></li>
+            <li className='navMenu'><NavLink to='Profile'>My Account</NavLink></li>
             <CiShoppingCart className='shoppingCart'/>
           </ul>
         </div>
@@ -59,8 +61,9 @@ export default function NavBar() {
             <Route path="Product/*" element={<ProductPage/>}/>
             <Route path="ProductView" element={<ProductView />}/>
             <Route path="AboutUs" element={<AboutUs/>}/>
-            <Route path="Profile" element={<Profile/>}/>
+            <Route path="Profile" element={<UserProfile/>}/>
             <Route path="Cart" element={<Cart/>}/>
+            <Route path="Purchase" element={<PurchaseSuccess/>}/>
         </Routes>
         <Footer/>
       </div>

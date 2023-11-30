@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CiCircleList } from 'react-icons/ci'
-import NavBar from '../objects/navBar'
+// import NavBar from '../objects/navBar'
 import Footer from '../objects/Footer'
 import { Link, NavLink, Navigate, Outlet, Route, Routes, useParams, useSearchParams } from 'react-router-dom'
 import { fetchProduct, fetchProductByCategory } from '../utils/DataQuery'

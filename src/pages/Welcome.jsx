@@ -53,10 +53,10 @@ export default function Welcome() {
           
           setLoading(false)
 
+          fetchingData()
         } catch (error) {
           console.error(error);
         }
-        fetchingData()
       }
     }
 
@@ -71,7 +71,7 @@ export default function Welcome() {
           password
         }`);
         SetFetchUser(data)
-        setFetched(fetchUser[0]);
+        // setFetched(fetchUser[0]);
 
         setLoading(false)
 
@@ -84,6 +84,17 @@ export default function Welcome() {
     }
     
     const fetchCondition = () => {
+      setFetched(fetchUser[0]);
+
+
+      console.log('fetch test');
+      console.log(uid);
+      console.log(userName);
+      console.log(password);
+      console.log(fetchUser);
+      console.log(fetched);
+      console.log('-----------');
+
       if (fetched === null || fetched === undefined || (Array.isArray(fetched) && fetched.length === 0)) {
         console.log('walang data');
         createAcc()
@@ -102,13 +113,7 @@ export default function Welcome() {
         setLoading(false)
       }
       
-      console.log('fetch test');
-      console.log(uid);
-      console.log(userName);
-      console.log(password);
-      console.log(fetchUser);
-      console.log(fetched);
-    console.log('-----------');
+      
 
     // const uidCheck = async () => {!uid ? console.error('uid not allowed') : fetchingData();}
     // const fetchcheck = async () => {!fetchUser ? console.error('fetched user empty') : fetchedData()}
@@ -135,7 +140,7 @@ export default function Welcome() {
       client.createIfNotExists(doc)
       .then(()  =>  { 
       console.log('creating account successful')
-      setUserCreated('new login Acc created, click login again to login')
+      setEvent('new login Acc created, click login again to login')
       })
       .catch(console.error)
     } catch (error) {
@@ -190,7 +195,7 @@ export default function Welcome() {
                 <div className=' rounded-full w-12 h-12 flex justify-center items-center ml-5'></div>
             </div>
             {!loading ? (<button className='welcomebtn'><p className="welcomebtntxt">Login</p></button>) : (<div>loading</div>)}
-            {userData ? <Navigate to='/home'/> : <div></div>}        
+            {userData ? <Navigate to='/main'/> : <div></div>}        
             <p>{ event }</p>
           </form>
       </div>

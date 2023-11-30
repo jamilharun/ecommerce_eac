@@ -19,3 +19,17 @@ export const fetchProduct = `*[_type == 'product']{
             price,
             image,
         }`;
+
+export const userDatabyId = (_id) => {
+    const userDataQuery = `*[_type == 'user' && _id == '${_id}']{
+        _id,
+        fname,
+        lname,
+        email,
+        phoneNumber,
+        courseSection,
+
+    }`;
+    return userDataQuery;
+
+}
