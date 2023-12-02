@@ -46,3 +46,24 @@ export const uploadImage = (uid, _id) => {
     }`;
     return userPicQuery
 }
+
+
+export const createCartFile = (userId, prodId, prodPrice, quantity, total) => {
+    const cartFileInput = `*[_type == 'cart']{
+        _id,
+        saveBy: {
+            _type: 'reference',
+            _ref: '${userId}',
+        },
+        productSave: {
+            _type: 'reference',
+            _ref: '${prodId}',
+        },
+        _type: 'cart',
+        price: ${prodPrice},
+        quantity: ${quantity},
+        total: ${total},
+        _createdAt,
+        }`;
+        return cartFileInput;
+}   

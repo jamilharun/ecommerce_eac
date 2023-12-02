@@ -2,7 +2,7 @@ import { defineField, defineType } from "sanity";
 
 export default defineType({
     name: 'cart',
-    title: 'Order',
+    title: 'Cart',
     type: 'document',
     fields: [
         defineField({
@@ -27,6 +27,16 @@ export default defineType({
         defineField({
             name: 'quantity',
             title: 'Quantity',
+            type: 'number'
+        }),
+        defineField({
+            name: 'price',
+            title: 'Price',
+            type: 'number'
+        }),
+        defineField({
+            name: 'total',
+            title: 'Total',
             type: 'number'
         }),
         
