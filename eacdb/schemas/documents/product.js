@@ -38,5 +38,10 @@ export default defineType({
             type: 'imageObject',
             title: 'Image',
         }),
+        defineField({
+            name: 'stock',
+            title: 'image Stocks',
+            type: 'number',
+        }),
     ]
 })

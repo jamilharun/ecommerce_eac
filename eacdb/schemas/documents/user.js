@@ -56,8 +56,12 @@ export default defineType({
             name: 'roles',
             title: 'Roles',
             type: 'boolean',
-            description: 'if false or neither. => user is not admin.. else if true => user admin',
-            
+            description: 'if false or neither. => user is not admin.. else if true => user admin', 
+        }),
+        defineField({
+            name: 'status',
+            type: 'string',
+            title: 'Account Status',
         }),
     ]
 })
