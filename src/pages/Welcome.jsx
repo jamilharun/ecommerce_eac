@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CryptoJS from 'crypto-js';
 
 import eaclogo from '../assets/eaclogo.png'
@@ -10,6 +10,7 @@ import { FaLock, FaUser } from "react-icons/fa";
 import { client } from '../utils/sanity';
 import { useUser } from '../utils/user';
 import { Navigate } from 'react-router-dom';
+import { fetchUserbyUid } from '../utils/DataQuery';
 
 
 
@@ -32,127 +33,92 @@ export default function Welcome() {
   
   const {userData, loginAuth, loggedIn} = useUser()
 
-  const onLogin = async (e) => {
-    e.preventDefault()
-    
-    
+  const acceptableDomain = '@eac.edu.ph';
 
-    const acceptableDomain = '@eac.edu.ph';
-    
-    const hashGenerate = async () => {
-      
-      if (!userName.includes(acceptableDomain)) {
-        return setUid(null)
-      }else{
+  const stateTesting = () => {
+    console.log('fetch test');
+    console.log('uid: ' + uid);
+    console.log('userName: ' + userName);
+    console.log('password: ' +password);
+    console.log('fetchUser: ' +fetchUser);
+    console.log('-----------');
+  }
+
+  useEffect(()=>{
+    const fetchCondition = () => {
+
+      stateTesting()
+      setLoading(true)
+      if (fetchUser === null || fetchUser === undefined || (Array.isArray(fetchUser) && fetchUser.length === 0)) {
+        console.log('Creating acc');
+        
+        const doc = {
+          _id: uid,
+          _type: 'user',
+          email: userName,
+          password: password,
+        };
+        // ito dito natin i reready mga data natin before ipasok sa database 
         try {
-          setLoading(true)
-          const hash = await CryptoJS.SHA256(userName).toString();
-          setUid(hash)
-          
-          setEvent('click again')
-          
+          client.createIfNotExists(doc)
+          .then(()  =>  { 
+          console.log('creating account successful')
+          setEvent('new login Acc created, click login again to login')
           setLoading(false)
-
-          fetchingData()
+          })
+          .catch((ok)=>{
+            console.log(ok)
+            setLoading(false)
+          })
         } catch (error) {
-          console.error(error);
+          console.log(error);
+          setEvent('creating acc error')
+          setLoading(false)
         }
-      }
-    }
 
-    
-    const fetchingData = async () => {
-      try {
-        setLoading(true)
-
-        const data = await client.fetch(`*[_id == '${uid}']{
-          _id,
-          email,
-          password
-        }`);
-        SetFetchUser(data)
-        // setFetched(fetchUser[0]);
+      } else {
+        console.log('Logging in');
+        // fetchedData()
+        loginAuth(fetchUser)
 
         setLoading(false)
+      }
+    }
+    fetchCondition()
+  },[fetchUser])
 
-        fetchCondition()
+  useEffect(()=>{
+    const fetchingData = async () => {
+      setLoading(true)
+      try {
+        const data = await client.fetch(fetchUserbyUid(uid));
+        SetFetchUser(data[0])
+        setLoading(false)
       } catch (error) {
         console.log(error);
         setEvent('fetch error. try again')
         setLoading(false)
       }
     }
-    
-    const fetchCondition = () => {
-      setFetched(fetchUser[0]);
+    fetchingData()
+  },[uid])
 
-
-      console.log('fetch test');
-      console.log(uid);
-      console.log(userName);
-      console.log(password);
-      console.log(fetchUser);
-      console.log(fetched);
-      console.log('-----------');
-
-      if (fetched === null || fetched === undefined || (Array.isArray(fetched) && fetched.length === 0)) {
-        console.log('walang data');
-        createAcc()
-      } else {
-        console.log('may data');
-        fetchedData()
-      }
-    }
-
-
-    const fetchedData = () => {
-        setLoading(true)
-
-        loginAuth(fetched)
-
+  
+  const hashGenerate = async (e) => {  
+    e.preventDefault()
+    setLoading(true)
+    if (!userName.includes(acceptableDomain)) {
+      return setUid(null)
+    }else{
+      try {
+        const hash = await CryptoJS.SHA256(userName).toString();
+        setUid(hash)
         setLoading(false)
-      }
-      
-      
-
-    // const uidCheck = async () => {!uid ? console.error('uid not allowed') : fetchingData();}
-    // const fetchcheck = async () => {!fetchUser ? console.error('fetched user empty') : fetchedData()}
-
-    hashGenerate()
-    
-    // uidCheck()
-    // fetchcheck()
-    
-  }
-
-  // ito create acc function
-  const createAcc = () => {
-
-    const doc = {
-      _id: uid,
-      _type: 'user',
-      email: userName,
-      password: password,
-    };
-
-    // ito dito natin i reready mga data natin before ipasok sa database 
-    try {
-      client.createIfNotExists(doc)
-      .then(()  =>  { 
-      console.log('creating account successful')
-      setEvent('new login Acc created, click login again to login')
-      })
-      .catch(console.error)
-    } catch (error) {
-      console.log(error);
-      setEvent('creating acc error')
+      } catch (err) {console.error(err)}
     }
-
-    // kung ready na. papasok na natin sha sa DB
-    
   }
-  
-  
+
+
   
   return (
     <section className='w-screen h-screen bg-articDaisy flex justify-center items-center'>
@@ -165,7 +131,7 @@ export default function Welcome() {
           
           <form 
             className='flex flex-col items-center justify-center'
-            onSubmit={onLogin}>
+            onSubmit={hashGenerate}>
             
             <div className='welcomeAuth'>
               <div className='bg-white rounded-full w-12 h-12 flex justify-center items-center ml-5'>

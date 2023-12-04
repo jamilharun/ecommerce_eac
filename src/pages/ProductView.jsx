@@ -5,9 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { client, urlFor } from '../utils/sanity';
 import { createCartFile } from '../utils/DataQuery';
 import { useUser } from '../utils/user';
-
+import { v4 } from 'uuid';
 
 const ProductView = () => {
+    const [uuid, setuuid] = useState(null)
     const [userId, getUserId] = useState(null)
     const [prodId, getProdId] = useState(null)
     const [prodPrice, setProdPrice] = useState(null)
@@ -24,17 +25,26 @@ const ProductView = () => {
     const {userData} = useUser()
     
     // probably useless but i just wanna see the data output
+    const alluseState = {
+        uuid: uuid,
+        userId: userId,
+        prodId: prodId,
+        prodPrice: prodPrice,
+        quantity: quantity,
+        total: total
+    }
+    
     useEffect(()=>{
 
         console.log(userData);
         console.log(product);
 
+        setuuid(v4())
         getUserId(userData._id)
         getProdId(product.state._id)
         setProdPrice(product.state.price)
         setQuantity(quantity)
-
-
+        
     },[product])
     
     useEffect(()=>{
@@ -47,22 +57,20 @@ const ProductView = () => {
 
         setLoading(true)
 
-        if (userId && prodId && prodPrice && quantity && total) {
+        var qty = Number(quantity)
+        if (uuid && userId && prodId && prodPrice && qty && total) {
             console.log('all operands are true');
-
-            console.log(userId);
-            console.log(prodId);
-            console.log(prodPrice);
-            console.log(quantity);
-            console.log(total);
+            
+            console.log(alluseState);
+            
             
             client
-                .create(createCartFile(userId, prodId, prodPrice, quantity, total))
+                .create(createCartFile(uuid, userId, prodId, prodPrice, qty, total))
                 .then(()=>{
                     setLoading(false)
                     
                     setCartSuccessful(true)
-                    navigate('/home')
+                    navigate('/main/cart')
 
                 })
                 .catch(e=>{console.log(e)})

@@ -138,7 +138,7 @@ export const UserProfile = () => {
 
             client
                 .patch(uid)
-                .set({ image: { _type: 'image', asset: { _type: 'reference', _ref: profilepic._id } } })
+                .set({ image: { _type: 'imageObject', asset: { _type: 'reference', _ref: profilepic._id } } })
                 .commit()
                 .then(ok => {
                     console.log('its' + ok);

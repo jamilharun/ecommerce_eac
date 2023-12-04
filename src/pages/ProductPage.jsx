@@ -26,7 +26,6 @@ const ProductPage = () => {
 
         try {
             const fetching = await client.fetch(`${query}`)
-            
             setProductQuery(fetching)
             // console.log(productQuery);
         } catch (error) {

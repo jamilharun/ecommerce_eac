@@ -1,3 +1,12 @@
+export const fetchUserbyUid = (uid) => {
+    const userData = `*[_id == '${uid}']{
+        _id,
+        email,
+        password
+        }`;
+        return userData;
+}
+
 export const fetchProductByCategory = (category) => {
     const fetchProductQuery = `*[_type == 'product' && 
         category == '${category}']{
@@ -48,22 +57,40 @@ export const uploadImage = (uid, _id) => {
 }
 
 
-export const createCartFile = (userId, prodId, prodPrice, quantity, total) => {
-    const cartFileInput = `*[_type == 'cart']{
-        _id,
+export const createCartFile = (uuid, userId, prodId, prodPrice, quantity, total) => {
+    const cartFileInput = {
+        _id: uuid,
         saveBy: {
             _type: 'reference',
-            _ref: '${userId}',
+            _ref: userId,
         },
-        productSave: {
+        productSaved: {
             _type: 'reference',
-            _ref: '${prodId}',
+            _ref: prodId,
         },
         _type: 'cart',
-        price: ${prodPrice},
-        quantity: ${quantity},
-        total: ${total},
-        _createdAt,
-        }`;
-        return cartFileInput;
-}   
+        price: prodPrice,
+        quantity: quantity,
+        total: total,
+    };
+    return cartFileInput;
+}
+
+export const fetchingUserCart = (userId) => {
+    const cartbyUser = `*[_type == 'cart' && saveBy->_id == '${userId}']{
+        _id,
+        productSaved->{
+            _id,
+            image,  
+        },
+        saveBy->{
+            _id,
+            image,
+        },
+        total,
+        quantity,
+        price,  
+        _createdAt
+    }`
+    return cartbyUser;
+}
