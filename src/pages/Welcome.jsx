@@ -62,9 +62,9 @@ export default function Welcome() {
         try {
           client.createIfNotExists(doc)
           .then(()  =>  { 
-          console.log('creating account successful')
-          setEvent('new login Acc created, click login again to login')
-          setLoading(false)
+            console.log('creating account successful')
+            setEvent('new login Acc created, click login again to login')
+            setLoading(false)
           })
           .catch((ok)=>{
             console.log(ok)

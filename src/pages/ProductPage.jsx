@@ -9,7 +9,7 @@ import ProductView from './ProductView'
 
 const ProductPage = () => {
 
-    const [product, setProduct] = useState(null);
+    // const [product, setProduct] = useState(null);
     const [productQuery, setProductQuery] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -17,44 +17,39 @@ const ProductPage = () => {
     
     const [catParams] = useSearchParams()
 
-
-    const fetchItem = async () => {
-        setLoading(true)
-
-        // const query = fetchProductByCategory(catParams.get("category"))
-        const query = queryType;
-
-        try {
-            const fetching = await client.fetch(`${query}`)
-            setProductQuery(fetching)
-            // console.log(productQuery);
-        } catch (error) {
-            console.error('Error' + error);
-            
-        }
+    useEffect(()=>{
         console.log(productQuery);
-        setLoading(false)
-    }
+    })
 
-    const toString = () => {fetchItem()}
-    
-    const conditionalQueryType = () => {
-        if (!catParams.get("category")) {
-            setQueryType(fetchProduct)
-            toString()
-        } else {
-            setQueryType(fetchProductByCategory(catParams.get("category")))
-            toString()
-        }
-    }
     
     useEffect(()=>{
+        // console.log(queryType);
+        const fetchItem = async () => {
+            setLoading(true)
+            try {
+                const fetching = await client.fetch(`${queryType}`)
+                setProductQuery(fetching)
+                setLoading(false)
+            } catch (error) {
+                console.error('Error' + error);
+                setLoading(false)
+            }
+            console.log(productQuery);
+        }
+        fetchItem()
+    },[queryType])
+    
+    useEffect(()=>{
+        const conditionalQueryType = () => {
+            if (!catParams.get("category")) {
+                setQueryType(fetchProduct)
+            } else {
+                setQueryType(fetchProductByCategory(catParams.get("category")))
+            }
+        }
         conditionalQueryType()
     },[catParams.get("category")])
 
-    const array = {
-        name: 'jamil'
-    }
 
     return (
     <div className='bg-articDaisy h-full w-full px-28'>
