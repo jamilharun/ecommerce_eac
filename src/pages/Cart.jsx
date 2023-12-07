@@ -6,6 +6,7 @@ import { fetchingUserCart } from '../utils/DataQuery'
 import { BsCartCheckFill } from "react-icons/bs";
 
 export default function Cart() {
+  const [uid, getUid] = useState(null)
   const [userId, getUserId] = useState(null)
   const [numArray, getNumArray] = useState(null)
   const [totalAmount, getTotalAmount] = useState(null)
@@ -18,12 +19,12 @@ export default function Cart() {
   // working on checkout button. dahil di pa nagawan ng code. 
   // at aayusin ulit database para tugma sa magiging system 
   const CheckoutBtn = () => {
-
+    
   }
 
   //---------------------------------
 
-  var total = 9;
+  var total = 0;
   const gettingTotal = (data) => {
 
     data.forEach((number) => {
@@ -99,14 +100,19 @@ export default function Cart() {
         </div>
       <div className='mt-3 flex justify-end'>
         <button
-          onClick={()=>{}} 
+          onClick={()=>{CheckoutBtn()}} 
           className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-64'>
           <p className='text-white text-center w-full font-semibold text-2xl'>Checkout</p>
           <BsCartCheckFill className='text-AlluraRed bg-white rounded-full m-2 text-4xl w-10 h-10'/>
         </button>
-        <div className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-80'>
-          <p className='text-white text-center w-full font-semibold text-2xl'>total: ₱{totalAmount}</p>
-        </div>
+        
+        {
+          numArray && (
+          <div className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-80'>
+            <p className='text-white text-center w-full font-semibold text-2xl'>total: ₱{totalAmount}</p>
+          </div>
+          )
+        }
       </div>
         
       </div>

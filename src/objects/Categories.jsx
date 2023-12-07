@@ -50,6 +50,9 @@ const Categories = ({}) => {
           
         </div>
       {/* <Footer/> */}
+      <div className='bg'>
+
+      </div>
     </div>
   )
 }

@@ -95,7 +95,7 @@ const ProductPage = () => {
         </div>
         
         
-
+        {/* <div className='bottom-0 bg-CartoonViolence w-full h-10 '></div> */}
         {/* <Footer/> */}
     </div>
     )

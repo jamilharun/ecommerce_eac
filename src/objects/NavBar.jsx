@@ -16,6 +16,8 @@ import PurchaseSuccess from '../pages/PurchaseSuccess';
 import { UserProfile } from '../pages/UserProfile';
 
 export default function NavBar() {
+  window.addEventListener('resize', () =>{console.log(window.innerWidth);});
+
   const [searchTerm, setSearchTerm] = useState('')
 
   const [goToProfile, setGoToProfile] = useState(false)
@@ -50,7 +52,7 @@ export default function NavBar() {
             <li className='navMenu'><NavLink to='AboutUs'>About us</NavLink> </li>
             <li className='navMenu'><NavLink to='Product/'>Shop</NavLink></li>
             <li className='navMenu'><NavLink to='Profile'>My Account</NavLink></li>
-            <CiShoppingCart className='shoppingCart'/>
+            <li><NavLink to='Cart'><CiShoppingCart className='shoppingCart'/></NavLink></li>
           </ul>
         </div>
       </nav>
@@ -65,7 +67,8 @@ export default function NavBar() {
             <Route path="Cart" element={<Cart/>}/>
             <Route path="Purchase" element={<PurchaseSuccess/>}/>
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
+        
       </div>
     </div>
   )

@@ -51,7 +51,7 @@ export default function Welcome() {
       setLoading(true)
       if (fetchUser === null || fetchUser === undefined || (Array.isArray(fetchUser) && fetchUser.length === 0)) {
         console.log('Creating acc');
-        
+        // stateTesting()
         const doc = {
           _id: uid,
           _type: 'user',
@@ -72,7 +72,7 @@ export default function Welcome() {
           })
         } catch (error) {
           console.log(error);
-          setEvent('creating acc error')
+          // setEvent('creating acc error')
           setLoading(false)
         }
 

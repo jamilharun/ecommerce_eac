@@ -1,6 +1,6 @@
 
 import Categories from "../objects/categories"
-import NavBar from "../objects/navBar"
+import NavBar from "../objects/navBar";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./Home";
 import Welcome from "./Welcome";
