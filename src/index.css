@@ -135,6 +135,10 @@
     height: 400px;
     width: 400px;
   }
+
+  .productContainer {
+    min-height: 100vh; 
+}
   .aboutUs {
     
   }
