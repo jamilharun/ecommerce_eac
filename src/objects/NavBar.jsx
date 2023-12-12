@@ -28,7 +28,7 @@ export default function NavBar() {
 
   return (
     <div>
-      <nav className='bg-CartoonViolence flex place-content-between font-poppins text-sm top-0 absolute h-16 w-full px-16'>
+       <nav className='bg-CartoonViolence flex place-content-between font-poppins text-sm top-0 fixed w-full h-16 px-16'>
         <div className='flex justify-center items-center '>
           <img src={eaclogo} alt="" className='w-11 h-11 -rotate-12'/>
           <img src={eacIcon} alt="" className='w-36 h-11 absolute left-20'/>
@@ -67,7 +67,7 @@ export default function NavBar() {
             <Route path="Cart" element={<Cart/>}/>
             <Route path="Purchase" element={<PurchaseSuccess/>}/>
         </Routes>
-        {/* <Footer/> */}
+        { <Footer/>}
         
       </div>
     </div>
