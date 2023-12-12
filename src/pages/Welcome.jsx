@@ -58,6 +58,7 @@ export default function Welcome() {
           email: userName,
           password: password,
         };
+        console.log(doc);
         // ito dito natin i reready mga data natin before ipasok sa database 
         try {
           client.createIfNotExists(doc)
@@ -89,6 +90,7 @@ export default function Welcome() {
 
   useEffect(()=>{
     const fetchingData = async () => {
+      // stateTesting()
       setLoading(true)
       try {
         const data = await client.fetch(fetchUserbyUid(uid));
@@ -118,6 +120,10 @@ export default function Welcome() {
     }
   }
 
+  // useEffect(()=>{
+  //   console.log(username);
+  //   console.log(password);
+  // },[userName, password])
 
   
   return (

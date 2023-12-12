@@ -4,6 +4,7 @@ import { useUser } from '../utils/user'
 import { client, urlFor } from '../utils/sanity'
 import { fetchingUserCart } from '../utils/DataQuery'
 import { BsCartCheckFill } from "react-icons/bs";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 export default function Cart() {
   const [uid, getUid] = useState(null)
@@ -13,8 +14,10 @@ export default function Cart() {
 
   const [fetchedData, getFetchedData] = useState(null)
   const [loading, setLoading] = useState(null)
+  // const [selectedCart, getSelectedCart] = useState({})
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const {userData} = useUser()
+  const {userData} = useUser({})
   
   // working on checkout button. dahil di pa nagawan ng code. 
   // at aayusin ulit database para tugma sa magiging system 
@@ -22,6 +25,25 @@ export default function Cart() {
     
   }
 
+  useEffect(()=>{
+    console.log(selectedItems);
+  },[selectedItems])
+
+  const handleCheckboxClick = (itemId) => {
+    // useEffect(()=>{
+      const isItemSelected = selectedItems.includes(itemId);
+
+      if (isItemSelected) {
+        // If selected, remove it from the array
+        setSelectedItems(selectedItems.filter(id => id !== itemId));
+      } else {
+        // If not selected, add it to the array
+        setSelectedItems([...selectedItems, itemId]);
+      }
+    // })
+
+    
+  };
   //---------------------------------
 
   var total = 0;
@@ -34,19 +56,7 @@ export default function Cart() {
     getTotalAmount(total)
   }
 
-  useEffect(()=>{
-    if (fetchedData === null || fetchedData === undefined || (Array.isArray(fetchedData) && fetchedData.length === 0)) {
-      console.log('no data');
-    } else {
-      const arraylength = () => {
-        var arrlength = fetchedData.length
-        getNumArray(arrlength)
-      }
-      arraylength()
-    }
-
-    console.log(fetchedData);
-  },[fetchedData])
+  
 
   useEffect(()=>{
     // console.log(fetchingUserCart(userId));
@@ -54,8 +64,8 @@ export default function Cart() {
       setLoading(true)
       try {
         const data = await client.fetch(fetchingUserCart(userId))
-        gettingTotal(data)
         getFetchedData(data)
+        gettingTotal(data)
         setLoading(false)
       } catch (err) {
         setLoading(false)
@@ -67,7 +77,23 @@ export default function Cart() {
   },[userId])
 
   useEffect(()=>{
-    getUserId(userData._id)
+    // console.log(fetchedData);
+    const arraylength = () => {
+      if (fetchedData === null || fetchedData === undefined || (Array.isArray(fetchedData) && fetchedData.length === 0)) {
+      console.log('no data');
+      } else {
+        console.log('it works');
+        var arrlength = fetchedData.length
+        getNumArray(arrlength)
+      }
+    }
+    arraylength()
+
+    console.log(fetchedData);
+  },[fetchedData])
+
+  useEffect(()=>{
+    getUserId(userData?._id)
   },[userData])
 
 
@@ -80,20 +106,24 @@ export default function Cart() {
         </div>
         <div className='border-EacColor-BlackPearl border-2 '>
           <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
+              <li className='w-full'></li>
               <li className='w-full'>item</li>
               <li className='w-full'>Price</li>
               <li className='w-full'>Quantity</li>
               <li className='w-full'>Total</li>
+              <li className='w-full'></li>
           </div>
           {
             fetchedData?.map(item => (
               <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
+                <input type="checkbox" name="" id="" onChange={()=>{handleCheckboxClick(item?._id)}} checked={selectedItems.includes(item?._id)} className='w-full text-center' />
                 <div className='w-full h-full'>
                   <img src={(urlFor(item.productSaved.image).url())} alt="" className='object-cover '/>
                 </div>
                 <p className='w-full text-center'>₱{item.price}</p>
                 <p className='w-full text-center'>{item.quantity}</p>
                 <p className='w-full text-center'>₱{item.total}</p>
+                <BsThreeDotsVertical className='w-full text-center' />
               </div>
             ))
           }
