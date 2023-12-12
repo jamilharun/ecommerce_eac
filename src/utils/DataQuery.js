@@ -8,8 +8,7 @@ export const fetchUserbyUid = (uid) => {
 }
 
 export const fetchProductByCategory = (category) => {
-    const fetchProductQuery = `*[_type == 'product' && 
-        category == '${category}']{
+    const fetchProductQuery = `*[_type == 'product' && category->categoryname == '${category}']{
             _id,
             name,
             category,
@@ -94,3 +93,10 @@ export const fetchingUserCart = (userId) => {
     }`
     return cartbyUser;
 }
+
+export const fetchCategory = `*[_type == 'categories'] {
+    image,
+    _type,
+    categoryname,
+    _id
+  }`

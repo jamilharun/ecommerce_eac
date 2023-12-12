@@ -16,10 +16,13 @@ export default defineType({
             description: 'yung bibili',
         }),
         defineField({
-            name: 'product',
-            title: 'Product',
-            type: 'reference',
-            to: [{ type: 'product'}],
+            name: 'checkout',
+            title: 'Checkout',
+            type: 'array',
+            of: [{
+                type: 'reference',
+                to: [{ type: 'product'}]
+            }],
         }),
         defineField({
             name: 'quantity',

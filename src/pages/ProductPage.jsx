@@ -17,9 +17,9 @@ const ProductPage = () => {
     
     const [catParams] = useSearchParams()
 
-    useEffect(()=>{
-        console.log(productQuery);
-    })
+    // useEffect(()=>{
+    //     console.log(productQuery);
+    // })
 
     
     useEffect(()=>{
@@ -45,6 +45,7 @@ const ProductPage = () => {
                 setQueryType(fetchProduct)
             } else {
                 setQueryType(fetchProductByCategory(catParams.get("category")))
+                console.log(fetchProductByCategory(catParams.get("category")));
             }
         }
         conditionalQueryType()
@@ -63,10 +64,10 @@ const ProductPage = () => {
                 
                 
                 <div className="checkbox flex flex-col">
-                    <Link to={`?category=SCHOOL ESSENTIALS`} className='productNavBtn' >School Essentials</Link>
-                    <Link to={`?category=MEDICAL SUPPLIES`} className='productNavBtn' >Medical Supplies</Link>
-                    <Link to={`?category=SCHOOL UNIFORM`} className='productNavBtn' >School Uniform</Link>
-                    <Link to={`?category=SCHOOL MERCHANDISE`} className='productNavBtn' >School Merchandise</Link>
+                    <Link to={`?category=School Essentials`} className='productNavBtn' >School Essentials</Link>
+                    <Link to={`?category=Medical Supplies`} className='productNavBtn' >Medical Supplies</Link>
+                    <Link to={`?category=Uniform`} className='productNavBtn' >School Uniform</Link>
+                    <Link to={`?category=School Merchandise`} className='productNavBtn' >School Merchandise</Link>
                 </div>
             </div>
             

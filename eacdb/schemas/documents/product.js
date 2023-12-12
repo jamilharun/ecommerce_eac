@@ -31,7 +31,7 @@ export default defineType({
             title: 'Category',
             type: 'reference',
             to: [{
-                title: 'Category',
+                title: 'Categories',
                 type: 'categories'
             }],
             description: 'category of the product',
