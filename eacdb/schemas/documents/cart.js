@@ -30,11 +30,6 @@ export default defineType({
             type: 'number'
         }),
         defineField({
-            name: 'price',
-            title: 'Price',
-            type: 'number'
-        }),
-        defineField({
             name: 'total',
             title: 'Total',
             type: 'number'

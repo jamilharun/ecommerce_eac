@@ -29,7 +29,11 @@ export default defineType({
         defineField({
             name: 'category',
             title: 'Category',
-            type: 'string',
+            type: 'reference',
+            to: [{
+                title: 'Category',
+                type: 'categories'
+            }],
             description: 'category of the product',
             
         }),
