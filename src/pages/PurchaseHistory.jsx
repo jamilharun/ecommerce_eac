@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
-import { fetchPurchaseHistory } from '../utils/DataQuery';
+// import { fetchPurchaseHistory } from '../utils/DataQuery';
 import { client, urlFor } from '../utils/sanity'
 import { useUser } from '../utils/user'
+import { fetchingPurchaseHistory } from '../utils/DataQuery';
 
 const PurchaseHistory = () => {
     const [purchaseHistoryData, setPurchaseHistoryData] = useState([]);
@@ -12,32 +13,36 @@ const PurchaseHistory = () => {
   
     const {userData} = useUser()
 
-    
-    // useEffect(() => {
-    //   console.log(userData._id);
-    //   console.log('======================================');
-    //   getUserId(userData._id) 
+    let query = fetchingPurchaseHistory(`${userData?._id}`)
 
-    //     console.log('Current User ID:', userId); // Log the user ID
-    //     const fetchData = async () => {
-    //       setLoading(true);
-    //       try {
-    //         const data = await client.fetch(fetchPurchaseHistory(userId)); // Correct function name
-    //         console.log('Purchase history raw data:', data);
-    //         setPurchaseHistoryData(data || []);
-    //         setLoading(false);
-    //       } catch (err) {
-    //         setLoading(false);
-    //         console.error('Error fetching purchase history:', err);
-    //       }
-    //     };
+    console.log(query);
+    
+    useEffect(() => {
+      console.log(userData._id);
+      console.log('======================================');
+      getUserId(userData._id) 
+
+        console.log('Current User ID:', userId); // Log the user ID
+        const fetchData = async () => {
+          setLoading(true);
+          try {
+            const data = await client.fetch(fetchingPurchaseHistory(userId)); // Correct function name
+            console.log('Purchase history raw data:', data);
+            setPurchaseHistoryData(data || []);
+            setLoading(false);
+          } catch (err) {
+            setLoading(false);
+            console.error('Error fetching purchase history:', err);
+          }
+        };
       
-    //     fetchData();
-    //   }, [userId, window.location.pathname]);
+        fetchData();
+      }, [userId, window.location.pathname]);
       
     useEffect(()=>{
+      // gettingData()
       console.log(userData);
-    },[userData])
+  },[userData?._id])
 
   return (
     <div className='bg-articDaisy w-screen h-full py-20 px-80'>

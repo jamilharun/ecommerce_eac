@@ -22,7 +22,7 @@ export default function NavBar() {
 
   const [goToProfile, setGoToProfile] = useState(false)
   
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   if (goToProfile) {return <Navigate to='/profile'/>}
 

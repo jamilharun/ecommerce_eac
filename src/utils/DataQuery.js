@@ -96,29 +96,29 @@ export const fetchingUserCart = (userId) => {
 }
 
 
-// export const fetchingPurchaseHistory = (userId) => {
-//     const purchaseHistoryByUser = `*[_type == 'order' && customer->_id == '${userId}']{
-//       _id,
-//       paymentAmount,
-//       customer->{
-//         _id,
-//         fname,
-//         lname
-//       },
-//       totalPrice,    
-//       checkout[]->{
-//         _id,
-//         productSaved->{
-//           _id,
-//           name,
-//           price
-//         },
-//         total,
-//         quantity
-//       }
-//     }`;
-//     return purchaseHistoryByUser;
-//   };
+export const fetchingPurchaseHistory = (userId) => {
+    const purchaseHistoryByUser = `*[_type == 'order' && customer->_id == '${userId}']{
+      _id,
+      paymentAmount,
+      customer->{
+        _id,
+        fname,
+        lname
+      },
+      totalPrice,    
+      checkout[]->{
+        _id,
+        productSaved->{
+          _id,
+          name,
+          price
+        },
+        total,
+        quantity
+      }
+    }`;
+    return purchaseHistoryByUser;
+  };
 
 
 
