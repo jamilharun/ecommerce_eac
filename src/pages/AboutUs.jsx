@@ -5,8 +5,8 @@ export default function AboutUs() {
   return (
     <div>
       <div className='h-screen w-screen overflow-hidden'>
-        <img src={aboutUsBGpic} alt="" className='aboutUs  bottom-0 w-full h-full object-cover -z-50' />
-        <div className='xl:px-4 xl:py-20 pt-20'>
+        <img src={aboutUsBGpic} alt="" className='aboutUs overflow-hidden bottom-0  absolute  -z-50 '/>
+        <div className=' xl:px-4 xl:py-20 pt-20'>
           <p className='text-8xl text-center font-black text-white font-poppins xl:py-10 lg:text-4xl lg:pt-4 lg:px-1'>About Us</p>
           <p className='text-center font-poppins text-xl text-white font-semibold xl:py-3 lg:py-4-10 lg:px-40 xl:px-72'>
             Welcome to EAC Express E-Commerce: Your One-Stop Shop for Educational Excellence

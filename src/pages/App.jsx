@@ -2,7 +2,6 @@
 import Categories from "../objects/categories"
 import NavBar from "../objects/navBar";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Home from "./Home";
 import Welcome from "./Welcome";
 import { UserProvider } from "../components/UserProvider";
 import ProductPage from "./ProductPage";

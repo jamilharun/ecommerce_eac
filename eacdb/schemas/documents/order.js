@@ -21,17 +21,17 @@ export default defineType({
             type: 'array',
             of: [{
                 type: 'reference',
-                to: [{ type: 'product'}]
+                to: [{ type: 'cart'}]
             }],
         }),
         defineField({
-            name: 'quantity',
-            title: 'Quantity',
+            name: 'totalPrice',
+            title: 'totalPrice',
             type: 'number',
             
         }),
         defineField({
-            name: 'paymentAmount', //price
+            name: 'paymentAmount',
             title: 'Payment_Amount',
             type: 'number',
         }),

@@ -9,7 +9,6 @@ import Footer from './Footer';
 import Categories from './categories';
 import ProductPage from '../pages/ProductPage';
 import ProductView from '../pages/ProductView';
-import Profile from '../pages/Profile';
 import Cart from '../pages/Cart';
 import AboutUs from '../pages/AboutUs';
 import PurchaseSuccess from '../pages/PurchaseSuccess';

@@ -80,7 +80,8 @@ export const fetchingUserCart = (userId) => {
         _id,
         productSaved->{
             _id,
-            image,  
+            image,
+            price  
         },
         saveBy->{
             _id,
@@ -100,3 +101,24 @@ export const fetchCategory = `*[_type == 'categories'] {
     categoryname,
     _id
   }`
+
+export const createOrderDoc = (uuid, userId, cartIds, userMoney, totalprice) => {
+    const selectedCartId = cartIds.map(cartId =>({
+        _ref: cartId.id,
+        _type: 'reference',
+        _key: cartId.key
+    }))
+    
+    const orderInput = {
+        _id: uuid,
+        _type: 'order',
+        customer: {
+            _type: 'reference',
+            _ref: userId
+        },
+        checkout: selectedCartId,
+        paymentAmount: userMoney,
+        totalPrice: totalprice
+    }
+    return orderInput
+}
