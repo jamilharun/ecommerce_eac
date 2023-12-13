@@ -99,23 +99,23 @@ export default function Cart() {
 
   
 
-  useEffect(()=>{
-    // console.log(fetchingUserCart(userId));
-    const fetchingCart = async ()  => {
-      setLoading(true)
+  useEffect(() => {
+    const fetchingCart = async () => {
+      setLoading(true);
       try {
-        const data = await client.fetch(fetchingUserCart(userId))
-        getFetchedData(data)
-        gettingTotal(data)
-        setLoading(false)
+        const data = await client.fetch(fetchingUserCart(userId));
+        getFetchedData(data);
+        gettingTotal(data);
+        setLoading(false);
       } catch (err) {
-        setLoading(false)
+        setLoading(false);
         console.error(err);
       }
       console.log('cartfetching finished');
-    }
-    fetchingCart()
-  },[userId])
+    };
+  
+    fetchingCart();
+  }, [userId, window.location.pathname]);
 
   useEffect(()=>{
     // console.log(fetchedData);
@@ -177,84 +177,82 @@ useEffect(() => {
   return (
     <div>
       {orderSuccess && (
-                <Link to={`/main/Purchase?id=${uuid}`} className='notifBlock absolute w-screen h-screen z-50'>
-                    <div className='h-screen w-screen flex justify-center items-center'>
-                        <div className='bg-white border-EacColor-BlackPearl border-2 w-96 h-52 rounded-2xl flex flex-col
-                            justify-center items-center'>
-                            <CiCircleCheck className='text-DarkLemonLime text-8xl'/>
-                            <p className='font-medium text-xl'>Order Successfully </p>
-                        </div>
-                    </div>
-                </Link>
-            )}
-        <div className='bg-articDaisy w-screen h-full py-20 px-80'>
-          <div className='flex justify-start items-center mt-5 text-5xl font-semibold'>
-            <IoCartOutline/>
-            Cart {numArray && `(${numArray} items)`}
-          </div>
-          <div className='border-EacColor-BlackPearl border-2 '>
-            <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
-                <li className='w-full'></li>
-                <li className='w-full'>item</li>
-                <li className='w-full'>Price</li>
-                <li className='w-full'>Quantity</li>
-                <li className='w-full'>Total</li>
-                <li className='w-full'></li>
+        <Link to={`/main/Purchase?id=${uuid}`} className='notifBlock absolute w-screen h-screen z-50'>
+          <div className='h-screen w-screen flex justify-center items-center'>
+            <div className='bg-white border-EacColor-BlackPearl border-2 w-96 h-52 rounded-2xl flex flex-col justify-center items-center'>
+              <CiCircleCheck className='text-DarkLemonLime text-8xl' />
+              <p className='font-medium text-xl'>Order Successfully </p>
             </div>
-              {
-                fetchedData?.map(item => (
-                  <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
-                    <input 
-                      type="checkbox" 
-                      onChange={()=>{
-                        setChecked(true)
-                        handleCheckboxClick(item?._id, item?.total)}} 
-                      checked={selectedItems.includes(item?._id)} 
-                      className='w-full text-center' />
-                  
-                  <div className='w-full h-full'>
-                    <img src={(urlFor(item.productSaved.image).url())} alt="" className='object-cover '/>
-                  </div>
-                  <p className='w-full text-center'>₱{item.productSaved.price}</p>
-                  <p className='w-full text-center'>{item.quantity}</p>
-                  <p className='w-full text-center'>₱{item.total}</p>
+          </div>
+        </Link>
+      )}
 
-                  {/* Immediate Deletion Button */}
-                  <button onClick={() => setForDeletion(item._id)}>Delete</button>
-              
-               
-              </div>
-            ))
-          }
+      <div className='bg-articDaisy w-screen h-full py-20 px-80'>
+        <div className='flex justify-between items-center mt-5 text-5xl font-semibold'>
+          <div className='flex items-center'>
+            <IoCartOutline />
+            <span className='ml-2'>Cart {numArray && `(${numArray} items)`}</span>
+          </div>
+
+          
+          <Link to="/main/PurchaseHistory" className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-50 mx-2'>
+            <p className='text-white text-center w-full font-semibold text-2xl'>View Purchase History</p>
+            <BsThreeDotsVertical className='text-AlluraRed bg-white rounded-full m-2 text-3xl w-8 h-8' />
+          </Link>
         </div>
-      <div className='mt-3 flex justify-end'>
-        {
-          checked ? (
-          <button
-            onClick={()=>{CheckoutBtn()}} 
-            className='bg-AlluraRed  border-white border-2 rounded-full flex justify-center items-center w-64'>
-            <p className='text-white text-center w-full font-semibold text-2xl'>Checkout</p>
-            <BsCartCheckFill className='text-AlluraRed bg-white rounded-full m-2 text-4xl w-10 h-10'/>
-          </button>
-          ):(
+
+        <div className='border-EacColor-BlackPearl border-2 '>
+          <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
+            <li className='w-full'></li>
+            <li className='w-full'>item</li>
+            <li className='w-full'>Price</li>
+            <li className='w-full'>Quantity</li>
+            <li className='w-full'>Total</li>
+            <li className='w-full'></li>
+          </div>
+          {fetchedData?.map((item) => (
+            <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
+              <input
+                type='checkbox'
+                onChange={() => {
+                  setChecked(true);
+                  handleCheckboxClick(item?._id, item?.total);
+                }}
+                checked={selectedItems.includes(item?._id)}
+                className='w-full text-center'
+              />
+
+              <div className='w-full h-full'>
+                <img src={urlFor(item.productSaved.image).url()} alt='' className='object-cover ' />
+              </div>
+              <p className='w-full text-center'>₱{item.productSaved.price}</p>
+              <p className='w-full text-center'>{item.quantity}</p>
+              <p className='w-full text-center'>₱{item.total}</p>
+
+              <button onClick={() => setForDeletion(item._id)}>Delete</button>
+            </div>
+          ))}
+        </div>
+        <div className='mt-3 flex justify-end'>
+          {checked ? (
+            <button onClick={() => CheckoutBtn()} className='bg-AlluraRed  border-white border-2 rounded-full flex justify-center items-center w-64'>
+              <p className='text-white text-center w-full font-semibold text-2xl'>Checkout</p>
+              <BsCartCheckFill className='text-AlluraRed bg-white rounded-full m-2 text-4xl w-10 h-10' />
+            </button>
+          ) : (
             <div className=' bg-EacColor-BlackPearl border-white border-2 rounded-full flex justify-center items-center w-64'>
               <p className='text-white text-center w-full font-semibold text-2xl'>Checkout</p>
-            <BsCartCheckFill className='text-EacColor-BlackPearl bg-white rounded-full m-2 text-4xl w-10 h-10'/>
+              <BsCartCheckFill className='text-EacColor-BlackPearl bg-white rounded-full m-2 text-4xl w-10 h-10' />
             </div>
-          )
-        }
-        
-        {
-          numArray && (
-          <div className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-80'>
-            <p className='text-white text-center w-full font-semibold text-2xl'>total: ₱{totalAmount}</p>
-          </div>
-          )
-        }
-      </div>
-        
+          )}
+
+          {numArray && (
+            <div className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-64'>
+              <p className='text-white text-center w-full font-semibold text-2xl'>total: ₱{totalAmount}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
-    
-  )
+  );
 }

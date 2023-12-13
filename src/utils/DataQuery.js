@@ -95,12 +95,43 @@ export const fetchingUserCart = (userId) => {
     return cartbyUser;
 }
 
+
+// export const fetchingPurchaseHistory = (userId) => {
+//     const purchaseHistoryByUser = `*[_type == 'order' && customer->_id == '${userId}']{
+//       _id,
+//       paymentAmount,
+//       customer->{
+//         _id,
+//         fname,
+//         lname
+//       },
+//       totalPrice,    
+//       checkout[]->{
+//         _id,
+//         productSaved->{
+//           _id,
+//           name,
+//           price
+//         },
+//         total,
+//         quantity
+//       }
+//     }`;
+//     return purchaseHistoryByUser;
+//   };
+
+
+
+
 export const fetchCategory = `*[_type == 'categories'] {
     image,
     _type,
     categoryname,
     _id
   }`
+
+
+
 
 export const createOrderDoc = (uuid, userId, cartIds, userMoney, totalprice) => {
     const selectedCartId = cartIds.map(cartId =>({
@@ -121,4 +152,5 @@ export const createOrderDoc = (uuid, userId, cartIds, userMoney, totalprice) => 
         totalPrice: totalprice
     }
     return orderInput
+    
 }

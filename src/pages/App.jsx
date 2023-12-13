@@ -4,7 +4,9 @@ import NavBar from "../objects/navBar";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Welcome from "./Welcome";
 import { UserProvider } from "../components/UserProvider";
+import PurchaseHistory from "./PurchaseHistory"; 
 import ProductPage from "./ProductPage";
+
 
 
 function App() {
@@ -20,7 +22,7 @@ function App() {
             <Route path="/main/*" element={<NavBar/>} />
               {/* <Route path="home" element={<Categories/>}/> 
               <Route path="productPage" element={<ProductPage/>}/> */}
-            
+            <Route path="/main/purchase-history" element={<PurchaseHistory />} /> 
           </Routes>
         </Router>
       </UserProvider>

@@ -10,6 +10,7 @@ import Categories from './categories';
 import ProductPage from '../pages/ProductPage';
 import ProductView from '../pages/ProductView';
 import Cart from '../pages/Cart';
+import PurchaseHistory from '../pages/PurchaseHistory';
 import AboutUs from '../pages/AboutUs';
 import PurchaseSuccess from '../pages/PurchaseSuccess';
 import { UserProfile } from '../pages/UserProfile';
@@ -65,6 +66,7 @@ export default function NavBar() {
             <Route path="Profile" element={<UserProfile/>}/>
             <Route path="Cart" element={<Cart/>}/>
             <Route path="Purchase" element={<PurchaseSuccess/>}/>
+            <Route path="PurchaseHistory" element={<PurchaseHistory />} />
         </Routes>
         { <Footer/>}
         
