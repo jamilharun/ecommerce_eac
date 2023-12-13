@@ -7,6 +7,7 @@ import { BsCartCheckFill } from "react-icons/bs";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { v4 as uuidv4 } from 'uuid';
 import { CiCircleCheck } from 'react-icons/ci'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
   const [uuid, getuUid] = useState(uuidv4())
@@ -24,7 +25,7 @@ export default function Cart() {
   const [selectTotal, setSelectTotal] = useState([]);
   const [checked, setChecked] = useState(null);
   
-  const [orderSuccess, setOrderSuccess] = useState(null)
+  const [orderSuccess, setOrderSuccess] = useState(true)
 
   const {userData} = useUser({})
   
@@ -138,9 +139,7 @@ export default function Cart() {
   return (
     <div>
       {orderSuccess && (
-                <div 
-                onClick={()=>{setOrderSuccess(false)}}
-                className='notifBlock absolute w-screen h-screen z-50'>
+                <Link to={`/main/Purchase?id=${uuid}`} className='notifBlock absolute w-screen h-screen z-50'>
                     <div className='h-screen w-screen flex justify-center items-center'>
                         <div className='bg-white border-EacColor-BlackPearl border-2 w-96 h-52 rounded-2xl flex flex-col
                             justify-center items-center'>
@@ -148,7 +147,7 @@ export default function Cart() {
                             <p className='font-medium text-xl'>Saved Successfully </p>
                         </div>
                     </div>
-                </div>
+                </Link>
             )}
       <div className='bg-articDaisy w-screen h-full py-20 px-80'>
         <div className='flex justify-start items-center mt-5 text-5xl font-semibold'>
