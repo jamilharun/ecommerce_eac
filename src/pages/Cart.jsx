@@ -14,6 +14,8 @@ export default function Cart() {
   // const [keyid, getKeyId] = useState(uuidv4)
 
 
+
+  
   const [userId, getUserId] = useState(null)
   const [numArray, getNumArray] = useState(null)
   const [totalAmount, getTotalAmount] = useState(null)
@@ -25,7 +27,7 @@ export default function Cart() {
   const [selectTotal, setSelectTotal] = useState([]);
   const [checked, setChecked] = useState(null);
   
-  const [orderSuccess, setOrderSuccess] = useState(true)
+  const [orderSuccess, setOrderSuccess] = useState(null)
 
   const {userData} = useUser({})
   
@@ -135,7 +137,43 @@ export default function Cart() {
     getUserId(userData?._id)
   },[userData])
 
+  // const handleDeleteClick = (itemId) => {
+  //   // Implement logic for item deletion
+  //   client
+  //     .patch(itemId)
+  //     .set({ 'isDeleted': true }) // Assuming you have a field 'isDeleted' in your schema
+  //     .commit()
+  //     .then((ok) => {
+  //       console.log("Delete successful");
+  //       // Assuming you want to remove the deleted item from the state
+  //       const updatedData = fetchedData.filter(dataItem => dataItem._id !== itemId);
+  //       setFetchedData(updatedData);
+  //     })
+  //     .catch((er) => {
+  //       console.log(er + " Error deleting item");
+  //     });
+  // };
 
+  const [forDeletion, setForDeletion] = useState(null);
+
+useEffect(() => {
+  if (forDeletion) {
+    client
+      .delete(forDeletion)
+      .then((ok) => {
+        console.log("Delete successful");
+      })
+      .catch((er) => {
+        console.log("Error deleting:", er);
+      });
+  }
+}, [forDeletion]);
+
+  
+
+  
+
+  
   return (
     <div>
       {orderSuccess && (
@@ -144,43 +182,47 @@ export default function Cart() {
                         <div className='bg-white border-EacColor-BlackPearl border-2 w-96 h-52 rounded-2xl flex flex-col
                             justify-center items-center'>
                             <CiCircleCheck className='text-DarkLemonLime text-8xl'/>
-                            <p className='font-medium text-xl'>Saved Successfully </p>
+                            <p className='font-medium text-xl'>Order Successfully </p>
                         </div>
                     </div>
                 </Link>
             )}
-      <div className='bg-articDaisy w-screen h-full py-20 px-80'>
-        <div className='flex justify-start items-center mt-5 text-5xl font-semibold'>
-          <IoCartOutline/>
-          Cart {numArray && `(${numArray} items)`}
-        </div>
-        <div className='border-EacColor-BlackPearl border-2 '>
-          <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
-              <li className='w-full'></li>
-              <li className='w-full'>item</li>
-              <li className='w-full'>Price</li>
-              <li className='w-full'>Quantity</li>
-              <li className='w-full'>Total</li>
-              <li className='w-full'></li>
+        <div className='bg-articDaisy w-screen h-full py-20 px-80'>
+          <div className='flex justify-start items-center mt-5 text-5xl font-semibold'>
+            <IoCartOutline/>
+            Cart {numArray && `(${numArray} items)`}
           </div>
-          {
-            fetchedData?.map(item => (
-              <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
-                <input 
-                  type="checkbox" 
-                  onChange={()=>{
-                    setChecked(true)
-                    handleCheckboxClick(item?._id, item?.total)}} 
-                  checked={selectedItems.includes(item?._id)} 
-                  className='w-full text-center' />
-                
-                <div className='w-full h-full'>
-                  <img src={(urlFor(item.productSaved.image).url())} alt="" className='object-cover '/>
-                </div>
-                <p className='w-full text-center'>₱{item.productSaved.price}</p>
-                <p className='w-full text-center'>{item.quantity}</p>
-                <p className='w-full text-center'>₱{item.total}</p>
-                <BsThreeDotsVertical className='w-full text-center' />
+          <div className='border-EacColor-BlackPearl border-2 '>
+            <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
+                <li className='w-full'></li>
+                <li className='w-full'>item</li>
+                <li className='w-full'>Price</li>
+                <li className='w-full'>Quantity</li>
+                <li className='w-full'>Total</li>
+                <li className='w-full'></li>
+            </div>
+              {
+                fetchedData?.map(item => (
+                  <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
+                    <input 
+                      type="checkbox" 
+                      onChange={()=>{
+                        setChecked(true)
+                        handleCheckboxClick(item?._id, item?.total)}} 
+                      checked={selectedItems.includes(item?._id)} 
+                      className='w-full text-center' />
+                  
+                  <div className='w-full h-full'>
+                    <img src={(urlFor(item.productSaved.image).url())} alt="" className='object-cover '/>
+                  </div>
+                  <p className='w-full text-center'>₱{item.productSaved.price}</p>
+                  <p className='w-full text-center'>{item.quantity}</p>
+                  <p className='w-full text-center'>₱{item.total}</p>
+
+                  {/* Immediate Deletion Button */}
+                  <button onClick={() => setForDeletion(item._id)}>Delete</button>
+              
+               
               </div>
             ))
           }
