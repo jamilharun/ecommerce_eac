@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
-// import { fetchPurchaseHistory } from '../utils/DataQuery';
 import { client, urlFor } from '../utils/sanity'
 import { useUser } from '../utils/user'
 import { fetchingPurchaseHistory } from '../utils/DataQuery';
