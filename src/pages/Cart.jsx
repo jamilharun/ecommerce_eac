@@ -13,8 +13,6 @@ export default function Cart() {
   const [uuid, getuUid] = useState(uuidv4())
   // const [keyid, getKeyId] = useState(uuidv4)
 
-
-
   
   const [userId, getUserId] = useState(null)
   const [numArray, getNumArray] = useState(null)
@@ -49,6 +47,23 @@ export default function Cart() {
       
     }
   }
+
+  //Clear Cart
+  const clearCart = () => {
+    // Implement your logic to clear the cart
+    console.log('Clearing the cart...');
+    getFetchedData([]);
+    getTotalAmount(0);
+    getNumArray(0);
+  };
+  <div className='mt-3 flex justify-end'>
+    <CheckoutBtn cartItems={fetchedData} totalAmount={totalAmount} onPlaceOrder={clearCart} />
+    {numArray && (
+      <div className='bg-AlluraRed border-white border-2 rounded-full flex justify-center items-center w-80'>
+        <p className='text-white text-center w-full font-semibold text-2xl'>total: ₱{totalAmount}</p>
+      </div>
+    )}
+  </div>
 
   useEffect(()=>{
     selectedItems.map((item) => {
@@ -97,7 +112,7 @@ export default function Cart() {
     getTotalAmount(total)
   }
 
-  
+
 
   useEffect(() => {
     const fetchingCart = async () => {
@@ -171,7 +186,6 @@ export default function Cart() {
   }, [forDeletion]);
   
 
-  
 
   
   return (
@@ -191,7 +205,7 @@ export default function Cart() {
         <div className='flex justify-between items-center mt-5 text-5xl font-semibold'>
           <div className='flex items-center'>
             <IoCartOutline />
-            <span className='ml-2'>Cart {numArray && `(${numArray} items)`}</span>
+            <span className='ml-2'>Cart Items</span>
           </div>
 
           
@@ -204,7 +218,7 @@ export default function Cart() {
         <div className='border-EacColor-BlackPearl border-2 '>
           <div className='flex items-center text-center list-none text-2xl font-semibold p-2'>
             <li className='w-full'></li>
-            <li className='w-full'>item</li>
+            <li className='w-full'>Item</li>
             <li className='w-full'>Price</li>
             <li className='w-full'>Quantity</li>
             <li className='w-full'>Total</li>
