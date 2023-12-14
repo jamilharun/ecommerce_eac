@@ -44,7 +44,7 @@ const PurchaseHistory = () => {
   }, [userData?._id]);
 
   return (
-    <div className='bg-articDaisy w-screen h-full py-20 px-80'>
+    <div className='bg-articDaisy w-screen h-screen py-20 px-80'>
       <div className='flex justify-between items-center mt-5 text-5xl font-semibold'>
         <div className="flex items-center">
           <Link to="main/Cart" className="text-AlluraRed flex items-center">

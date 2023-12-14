@@ -156,19 +156,19 @@ export default function Cart() {
 
   const [forDeletion, setForDeletion] = useState(null);
 
-useEffect(() => {
-  if (forDeletion) {
-    client
-      .delete(forDeletion)
-      .then((ok) => {
-        console.log("Delete successful");
-      })
-      .catch((er) => {
-        console.log("Error deleting:", er);
-      });
-  }
-}, [forDeletion]);
-
+  useEffect(() => {
+    if (forDeletion) {
+      console.log("Deleting item with ID:", forDeletion);
+      client
+        .delete(forDeletion)
+        .then((ok) => {
+          console.log("Delete successful");
+        })
+        .catch((er) => {
+          console.log("Error deleting:", er);
+        });
+    }
+  }, [forDeletion]);
   
 
   
@@ -211,7 +211,7 @@ useEffect(() => {
             <li className='w-full'></li>
           </div>
           {fetchedData?.map((item) => (
-            <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
+        <div key={item._id} className='flex justify-between items-center text-2xl font-semibold border-EacColor-BlackPearl border-t-2 p-2'>
               <input
                 type='checkbox'
                 onChange={() => {
@@ -230,7 +230,7 @@ useEffect(() => {
               <p className='w-full text-center'>₱{item.total}</p>
 
               <button onClick={() => setForDeletion(item._id)}>Delete</button>
-            </div>
+        </div>
           ))}
         </div>
         <div className='mt-3 flex justify-end'>
