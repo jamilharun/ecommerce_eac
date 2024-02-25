@@ -1,5 +1,5 @@
 import React from 'react'
-import aboutUsBGpic from '../assets/AboutUs.jpg'
+import aboutUsBGpic from '../assets/aboutUs.jpg'
 
 export default function AboutUs() {
   return (

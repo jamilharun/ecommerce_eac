@@ -1,11 +1,11 @@
 
-import Categories from "../objects/categories"
-import NavBar from "../objects/navBar";
+// import NavBar from "../objects/navBar";
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Welcome from "./Welcome";
 import { UserProvider } from "../components/UserProvider";
 import PurchaseHistory from "./PurchaseHistory"; 
 import ProductPage from "./ProductPage";
+import NavBar from "../objects/NavBar";
 
 
 

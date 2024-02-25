@@ -6,7 +6,8 @@ import eaclogo from '../assets/eac.png'
 import eacIcon from '../assets/eacExpress.png'
 // import LoginButton from '../components/Login';
 import Footer from './Footer';
-import Categories from './categories';
+
+import Categories from './Categories';
 import ProductPage from '../pages/ProductPage';
 import ProductView from '../pages/ProductView';
 import Cart from '../pages/Cart';
@@ -15,7 +16,7 @@ import AboutUs from '../pages/AboutUs';
 import PurchaseSuccess from '../pages/PurchaseSuccess';
 import { UserProfile } from '../pages/UserProfile';
 
-export default function NavBar() {
+const NavBar = () =>{
   window.addEventListener('resize', () =>{console.log(window.innerWidth);});
 
   const [searchTerm, setSearchTerm] = useState('')
@@ -74,3 +75,4 @@ export default function NavBar() {
     </div>
   )
 }
+export default NavBar;

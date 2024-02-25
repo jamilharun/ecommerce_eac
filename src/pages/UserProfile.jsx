@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import imageicon from '../assets/imageicon.png'
 import { useUser } from '../utils/user'
 import { client, urlFor } from '../utils/sanity'
 import { userDatabyId } from '../utils/DataQuery'
